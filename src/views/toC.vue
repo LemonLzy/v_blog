@@ -13,6 +13,8 @@
   import useCountStore from '@/store/module/useCountStore';
   import AppIcon from '@/components/common/AppIcon.vue';
 
+  console.log(import.meta.env.VITE_API_URL);
+
   const countStore = useCountStore();
 </script>
 

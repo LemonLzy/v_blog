@@ -6,9 +6,36 @@ import '@vue/runtime-core';
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AppIcon: typeof import('./src/components/common/AppIcon.vue')['default'];
+    ElAside: typeof import('element-plus/es')['ElAside'];
+    ElAvatar: typeof import('element-plus/es')['ElAvatar'];
     ElButton: typeof import('element-plus/es')['ElButton'];
+    ElCheckbox: typeof import('element-plus/es')['ElCheckbox'];
+    ElCheckboxGroup: typeof import('element-plus/es')['ElCheckboxGroup'];
+    ElCol: typeof import('element-plus/es')['ElCol'];
+    ElContainer: typeof import('element-plus/es')['ElContainer'];
+    ElDropdown: typeof import('element-plus/es')['ElDropdown'];
+    ElDropdownItem: typeof import('element-plus/es')['ElDropdownItem'];
+    ElDropdownMenu: typeof import('element-plus/es')['ElDropdownMenu'];
+    ElFooter: typeof import('element-plus/es')['ElFooter'];
+    ElForm: typeof import('element-plus/es')['ElForm'];
+    ElFormItem: typeof import('element-plus/es')['ElFormItem'];
+    ElHeader: typeof import('element-plus/es')['ElHeader'];
+    ElIcon: typeof import('element-plus/es')['ElIcon'];
+    ElInput: typeof import('element-plus/es')['ElInput'];
+    ElMain: typeof import('element-plus/es')['ElMain'];
+    ElMenu: typeof import('element-plus/es')['ElMenu'];
+    ElMenuItem: typeof import('element-plus/es')['ElMenuItem'];
+    ElMenuItemGroup: typeof import('element-plus/es')['ElMenuItemGroup'];
+    ElOption: typeof import('element-plus/es')['ElOption'];
+    ElRow: typeof import('element-plus/es')['ElRow'];
+    ElScrollbar: typeof import('element-plus/es')['ElScrollbar'];
+    ElSelect: typeof import('element-plus/es')['ElSelect'];
+    ElSubMenu: typeof import('element-plus/es')['ElSubMenu'];
+    ElSwitch: typeof import('element-plus/es')['ElSwitch'];
+    ElUpload: typeof import('element-plus/es')['ElUpload'];
     RouterLink: typeof import('vue-router')['RouterLink'];
     RouterView: typeof import('vue-router')['RouterView'];
+    TinyMce: typeof import('./src/components/common/TinyMce.vue')['default'];
   }
 }
 

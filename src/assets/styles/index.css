@@ -1,4 +1,12 @@
-/* ./src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html, body {
+    @apply h-full
+  }
+  #app {
+    @apply h-full
+  }
+}
