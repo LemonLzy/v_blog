@@ -125,6 +125,7 @@
   .layout-container-demo .el-aside {
     color: var(--el-text-color-primary);
     height: calc(100vh - 60px);
+    border-radius: 20px;
   }
 
   .layout-container-demo .el-menu {
