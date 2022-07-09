@@ -21,7 +21,20 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/admin',
     name: 'admin',
+    redirect: { name: 'Dashboard' }, // 默认跳转到子路由dashboard
     component: () => import('@/views/AdminView.vue'),
+    children: [
+      {
+        path: 'dashboard',
+        name: 'Dashboard',
+        component: () => import('@/views/tome/DashBoard.vue'),
+      },
+      {
+        path: 'userList',
+        name: 'UserList',
+        component: () => import('@/views/tome/UserList.vue'),
+      },
+    ],
   },
 ];
 

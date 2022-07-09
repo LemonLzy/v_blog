@@ -1,79 +1,60 @@
 <template>
   <el-container class="wrapper">
-    <el-aside :width="asideWidth" class="left-aside transition-all">
-      <div class="aside-logo">
-        <div class="text">{{ collapse ? '无' : '后台模板' }}</div>
+    <el-header class="top-header">
+      <div class="left-header">
+        <div class="text-black flex items-center" @click="handleAsideChange">
+          <app-icon icon="ant-design:menu-fold-outlined" class="text-2xl cursor-pointer"></app-icon>
+        </div>
+        <div class="site-title">lemonlzy</div>
       </div>
-      <div class="aside-menus">
-        <el-menu default-active="2" class="el-menu-vertical-demo" :collapse="collapse">
-          <el-sub-menu index="1">
-            <template #title>
-              <el-icon>
-                <location />
-              </el-icon>
-              <span>Navigator One</span>
+      <div class="right-header">
+        <el-header class="right-header">
+          <el-dropdown trigger="click">
+            <el-avatar
+              alt="Avatar"
+              src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+            />
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item>修改密码</el-dropdown-item>
+                <el-dropdown-item>退出登录</el-dropdown-item>
+              </el-dropdown-menu>
             </template>
-            <el-menu-item-group title="Group One">
-              <el-menu-item index="1-1">item one</el-menu-item>
-              <el-menu-item index="1-2">item one</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="Group Two">
-              <el-menu-item index="1-3">item three</el-menu-item>
-            </el-menu-item-group>
-            <el-sub-menu index="1-4">
-              <template #title>item four</template>
-              <el-menu-item index="1-4-1">item one</el-menu-item>
-            </el-sub-menu>
-          </el-sub-menu>
-          <el-menu-item index="2">
-            <el-icon>
-              <icon-menu />
-            </el-icon>
-            <span>Navigator Two</span>
-          </el-menu-item>
-          <el-menu-item index="3" disabled>
-            <el-icon>
-              <document />
-            </el-icon>
-            <span>Navigator Three</span>
-          </el-menu-item>
-          <el-menu-item index="4">
+          </el-dropdown>
+        </el-header>
+      </div>
+    </el-header>
+    <el-container class="main">
+      <el-aside :width="asideWidth" class="left-aside">
+        <el-menu
+          default-active="2"
+          class="left-menu"
+          :collapse="collapse"
+          :collapse-transition="false"
+          @select="handlerMenuChange"
+        >
+          <el-menu-item index="1">
             <el-icon>
               <setting />
             </el-icon>
-            <span>Navigator Four</span>
+            <span>控制面板</span>
           </el-menu-item>
+          <el-sub-menu index="2">
+            <template #title>
+              <el-icon>
+                <UserFilled />
+              </el-icon>
+              <span>用户列表</span>
+            </template>
+            <el-menu-item index="2-1">
+              <span>用户管理</span>
+            </el-menu-item>
+          </el-sub-menu>
         </el-menu>
-      </div>
-    </el-aside>
-    <el-container class="right-wrapper">
-      <el-header class="right-header">
-        <div class="header-left">
-          <div v-if="asideWidth === '200px'" @click="handleAsideChange">
-            <app-icon icon="ant-design:menu-fold-outlined" class="text-xl cursor-pointer" />
-          </div>
-          <div v-else @click="handleAsideChange">
-            <app-icon icon="ant-design:menu-unfold-outlined" class="text-xl cursor-pointer" />
-          </div>
-        </div>
-        <div class="header-right">
-          <div class="avatar cursor-pointer">
-            <el-dropdown trigger="click">
-              <el-avatar
-                alt="Avatar"
-                src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-              />
-              <template #dropdown>
-                <el-dropdown-menu>
-                  <el-dropdown-item>修改密码</el-dropdown-item>
-                  <el-dropdown-item>退出登录</el-dropdown-item>
-                </el-dropdown-menu>
-              </template>
-            </el-dropdown>
-          </div>
-        </div>
-      </el-header>
-      <el-main class="right-main">Main</el-main>
+      </el-aside>
+      <el-main>
+        <router-view />
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -81,7 +62,8 @@
 <script lang="ts" setup>
   import AppIcon from '@/components/common/AppIcon.vue';
   import { computed, ref } from 'vue';
-  import { Document, Menu as IconMenu, Location, Setting } from '@element-plus/icons-vue';
+  import { Setting, UserFilled } from '@element-plus/icons-vue';
+  import { useRouter } from 'vue-router';
 
   const asideWidth = ref('200px');
 
@@ -89,9 +71,25 @@
     asideWidth.value = asideWidth.value === '200px' ? '60px' : '200px';
   };
 
+  // hooks函数：解耦，相当于vue2里面的 this.$router
+  const router = useRouter();
+
+  const handlerMenuChange = (index: string) => {
+    switch (index) {
+      case '1':
+        router.push({ name: 'Dashboard' });
+        break;
+      case '2-1':
+        router.push({ name: 'UserList' });
+        break;
+    }
+  };
+
   const collapse = computed(() => {
     return asideWidth.value !== '200px';
   });
+
+  //axios
 </script>
 
 <style scoped>
@@ -99,41 +97,33 @@
     @apply h-full w-full;
   }
 
+  .top-header {
+    @apply bg-gray-100 flex items-center justify-between;
+  }
+
   .left-aside {
-    @apply h-full bg-gray-100 flex flex-col;
+    @apply bg-gray-100 transition-all;
   }
 
-  .aside-logo {
-    @apply text-center h-10 px-4 select-none;
+  .left-menu {
+    @apply h-full;
+    @apply overflow-x-hidden;
   }
 
-  .aside-menus {
-    height: calc(100% - 2.5rem);
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-
-  .text {
-    @apply text-center text-base font-bold py-2 px-4 bg-gray-700 text-white select-none rounded;
-  }
-
-  .right-wrapper {
-    @apply flex-1;
+  .main {
+    height: calc(100% - 60px);
+    @apply overflow-y-auto bg-gray-200;
   }
 
   .right-header {
-    @apply bg-indigo-200 flex items-center justify-between;
+    @apply flex items-center justify-between;
   }
 
-  .header-left {
+  .left-header {
     @apply flex;
   }
 
-  .header-right {
-    @apply flex;
-  }
-
-  .right-main {
-    @apply bg-green-300;
+  .site-title {
+    @apply font-bold ml-3 text-lg;
   }
 </style>
