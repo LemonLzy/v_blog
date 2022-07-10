@@ -11,25 +11,32 @@ const requests = axios.create({
 //请求拦截器
 requests.interceptors.request.use((config) => {
   config = config || {};
-  const user = JSON.parse(localStorage.getItem(KEY_USER_ID) || '') as UserInfo;
-  if (user.token) {
-    config.headers!['Authorization'] = `Bearer ${user.token}`;
-  }
+  try {
+    const user = JSON.parse(localStorage.getItem(KEY_USER_ID) || '') as UserInfo;
+    if (user.r_token) {
+      config.headers!['Authorization'] = `Bearer ${user.r_token}`;
+    }
+  } catch (e) {}
   return config;
 });
 
 //响应拦截器
-requests.interceptors.response.use((resp) => {
-  const { code, msg } = resp.data || {};
-  if (code != Code_Success) {
-    return Promise.reject(msg);
-  }
-  if (code === Code_Invalid_Token) {
-    router.push({ name: 'login' }).then();
-    return Promise.reject(msg);
-  }
+requests.interceptors.response.use(
+  (resp) => {
+    const { code, msg } = resp.data || {};
+    if (code != Code_Success) {
+      return Promise.reject(msg);
+    }
+    if (code === Code_Invalid_Token) {
+      router.push({ name: 'login' }).then();
+      return Promise.reject(msg);
+    }
 
-  return Promise.resolve(resp);
-});
+    return Promise.resolve(resp);
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 export default requests;

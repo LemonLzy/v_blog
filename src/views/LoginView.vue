@@ -2,7 +2,7 @@
   <div class="container">
     <div class="loginBox">
       <div class="imgDiv">
-        <el-avatar v-model:src="avatarURL" :size="100" shape="circle" />
+        <el-avatar v-model:src="avatar" :size="100" shape="circle" />
       </div>
       <el-form
         ref="formEl"
@@ -36,15 +36,20 @@
 
 <script lang="ts" setup>
   import { FormRules } from 'element-plus/es';
+  import { ElMessage } from 'element-plus';
   import avatarURL from '@/assets/vb.gif';
   import { reactive, ref } from 'vue';
+  import { reqUserSignIn } from '@/api/userApi';
+  import { Code_Success } from '@/app/codes';
+  import { useRouter } from 'vue-router';
+  import useUserStore from '@/store/module/useUserStore';
 
   const loginForm = reactive({
     username: '',
     password: '',
-    avatarURL: avatarURL,
   });
 
+  const avatar = avatarURL;
   const size = ref('default');
   const labelPosition = ref('right');
   const rules = reactive<FormRules>({
@@ -62,7 +67,7 @@
         trigger: 'blur',
       },
       {
-        min: 6,
+        min: 0,
         max: 16,
         message: 'Length should be 6 to 16',
         trigger: 'blur',
@@ -70,12 +75,25 @@
     ],
   });
   const formEl = ref<HTMLFormElement | null>(null);
+  const router = useRouter();
+  const userStore = useUserStore();
 
-  const handlerLogin = () => {
-    formEl.value?.validate().then(async (ok: boolean) => {
+  const handlerLogin = (e: Event) => {
+    e.preventDefault();
+    formEl.value!.validate().then(async (ok: boolean) => {
       if (!ok) return;
-
-      console.log(ok);
+      try {
+        let { code, data, msg } = await reqUserSignIn(loginForm);
+        if (code === Code_Success) {
+          ElMessage.success(msg);
+          userStore.login(data);
+          await router.push({ name: 'Dashboard' });
+          return;
+        }
+        ElMessage.error(msg);
+      } catch (e) {
+        ElMessage.error(e as string);
+      }
     });
   };
 </script>
