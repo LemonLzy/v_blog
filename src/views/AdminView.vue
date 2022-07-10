@@ -9,15 +9,15 @@
       </div>
       <div class="right-header">
         <el-header class="right-header">
-          <el-dropdown trigger="click">
+          <el-dropdown trigger="click" @command="handleSelect">
             <el-avatar
               alt="Avatar"
               src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
             />
             <template #dropdown>
               <el-dropdown-menu>
-                <el-dropdown-item>修改密码</el-dropdown-item>
-                <el-dropdown-item>退出登录</el-dropdown-item>
+                <el-dropdown-item command="modify_pw">修改密码</el-dropdown-item>
+                <el-dropdown-item command="sign_out">退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </template>
           </el-dropdown>
@@ -64,6 +64,7 @@
   import { computed, ref } from 'vue';
   import { Setting, UserFilled } from '@element-plus/icons-vue';
   import { useRouter } from 'vue-router';
+  import { ElMessage } from 'element-plus';
 
   const asideWidth = ref('200px');
 
@@ -89,6 +90,16 @@
     return asideWidth.value !== '200px';
   });
 
+  const handleSelect = (c: string) => {
+    switch (c) {
+      case 'sign_out':
+        router.push({ name: 'login' });
+        ElMessage.info('退出成功');
+        break;
+      case 'modify_pw':
+        break;
+    }
+  };
   //axios
 </script>
 

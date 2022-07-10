@@ -86,7 +86,7 @@
         let { code, data, msg } = await reqUserSignIn(loginForm);
         if (code === Code_Success) {
           ElMessage.success(msg);
-          userStore.login(data);
+          userStore.sign_in(data);
           await router.push({ name: 'Dashboard' });
           return;
         }

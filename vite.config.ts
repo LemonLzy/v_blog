@@ -29,4 +29,10 @@ export default defineConfig({
       content: ['**/*.html', '**/*.js', '**/*.vue'],
     }),
   ],
+  server: {
+    host: '127.0.0.1',
+    port: 3000,
+    // 是否开启 https
+    https: false,
+  },
 });

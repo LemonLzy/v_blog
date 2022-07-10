@@ -12,7 +12,7 @@ export const KEY_USER_ID = 'user';
 
 const useUserStore = defineStore({
   id: KEY_USER_ID,
-  state: (): UserInfo => ({
+  state: (): Partial<UserInfo> => ({
     user_id: -1,
     nickname: '',
     is_admin: 0,
@@ -36,11 +36,14 @@ const useUserStore = defineStore({
     setRToken(r_token: string) {
       this.$state.r_token = r_token;
     },
-    login(user: Partial<UserInfo>) {
+    sign_in(user: Partial<UserInfo>) {
       this.$state = {
         ...this.$state,
         ...user,
       };
+    },
+    sign_out() {
+      this.$state = {};
     },
   },
 });
@@ -55,7 +58,7 @@ instance.$subscribe((mutation, state) => {
 //init
 const val = localStorage.getItem(instance.$id);
 if (val) {
-  instance.login(JSON.parse(val));
+  instance.sign_in(JSON.parse(val));
 }
 
 export default useUserStore;

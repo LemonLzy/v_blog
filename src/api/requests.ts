@@ -16,7 +16,9 @@ requests.interceptors.request.use((config) => {
     if (user.r_token) {
       config.headers!['Authorization'] = `Bearer ${user.r_token}`;
     }
-  } catch (e) {}
+  } catch (e) {
+    console.log(e);
+  }
   return config;
 });
 
