@@ -90,9 +90,8 @@
           await router.push({ name: 'Dashboard' });
           return;
         }
-        ElMessage.error(msg);
-      } catch (e) {
-        ElMessage.error(e as string);
+      } catch (e: any) {
+        ElMessage.error(e.message);
       }
     });
   };

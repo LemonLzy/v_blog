@@ -89,11 +89,11 @@
   const collapse = computed(() => {
     return asideWidth.value !== '200px';
   });
-
   const handleSelect = (c: string) => {
     switch (c) {
       case 'sign_out':
         router.push({ name: 'login' });
+        window.localStorage.clear();
         ElMessage.info('退出成功');
         break;
       case 'modify_pw':

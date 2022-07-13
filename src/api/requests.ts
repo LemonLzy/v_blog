@@ -2,6 +2,7 @@ import axios from 'axios';
 import { KEY_USER_ID, UserInfo } from '@/store/module/useUserStore';
 import { Code_Invalid_Token, Code_Success } from '@/app/codes';
 import router from '@/router';
+import { errorMessage } from 'style-resources-loader/lib/utils';
 
 const requests = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -27,11 +28,13 @@ requests.interceptors.response.use(
   (resp) => {
     const { code, msg } = resp.data || {};
     if (code != Code_Success) {
-      return Promise.reject(msg);
+      const err = new Error(msg);
+      return Promise.reject(err);
     }
     if (code === Code_Invalid_Token) {
       router.push({ name: 'login' }).then();
-      return Promise.reject(msg);
+      const err = new Error(msg);
+      return Promise.reject(err);
     }
 
     return Promise.resolve(resp);
