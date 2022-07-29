@@ -32,7 +32,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'userList',
         name: 'UserList',
-        component: () => import('@/views/tome/UserList.vue'),
+        component: () => import('@/views/tome/ArticleList.vue'),
       },
     ],
   },

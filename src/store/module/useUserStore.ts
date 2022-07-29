@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia';
 
 export interface UserInfo {
-  user_id: number;
+  user_id: string;
   nickname: string;
-  is_admin: number;
+  is_admin: string;
   a_token: string;
   r_token: string;
 }
@@ -13,18 +13,18 @@ export const KEY_USER_ID = 'user';
 const useUserStore = defineStore({
   id: KEY_USER_ID,
   state: (): Partial<UserInfo> => ({
-    user_id: -1,
+    user_id: '-1',
     nickname: '',
-    is_admin: 0,
+    is_admin: '0',
     a_token: '',
     r_token: '',
   }),
 
   actions: {
-    setID(user_id: number) {
+    setID(user_id: string) {
       this.$state.user_id = user_id;
     },
-    setRole(is_admin: number) {
+    setRole(is_admin: string) {
       this.$state.is_admin = is_admin;
     },
     setNickname(nickname: string) {

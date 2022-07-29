@@ -23,7 +23,8 @@ interface ParamSignIn {
 
 interface RespSignIn {
   nickname: string;
-  userID: string;
+  user_id: string;
+  is_admin: string;
   a_token: string;
   r_token: string;
 }

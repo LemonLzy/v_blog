@@ -1,9 +1,10 @@
 import axios from 'axios';
-import { KEY_USER_ID, UserInfo } from '@/store/module/useUserStore';
 import { Code_Invalid_Token, Code_Success } from '@/app/codes';
 import router from '@/router';
+import { useCookies } from 'vue3-cookies';
 
 const requests = axios.create({
+  // withCredentials: true, // 跨域携带cookies
   baseURL: import.meta.env.VITE_API_URL,
   timeout: 10000,
 });
@@ -11,10 +12,14 @@ const requests = axios.create({
 //请求拦截器
 requests.interceptors.request.use((config) => {
   config = config || {};
+  let UserInfo = {
+    r_token: useCookies().cookies.get('r_token'),
+    a_token: useCookies().cookies.get('a_token'),
+  };
   try {
-    const user = JSON.parse(localStorage.getItem(KEY_USER_ID) || '') as UserInfo;
-    if (user.r_token) {
-      config.headers!['Authorization'] = `Bearer ${user.r_token}`;
+    if (UserInfo.r_token) {
+      config.headers!['Authorization'] = `Bearer ${UserInfo.a_token}`;
+      console.log(UserInfo.a_token);
     }
   } catch (e) {
     console.log(e);

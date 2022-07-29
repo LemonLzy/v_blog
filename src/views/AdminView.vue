@@ -65,6 +65,7 @@
   import { Setting, UserFilled } from '@element-plus/icons-vue';
   import { useRouter } from 'vue-router';
   import { ElMessage } from 'element-plus';
+  import { useCookies } from 'vue3-cookies';
 
   const asideWidth = ref('200px');
 
@@ -85,6 +86,7 @@
         break;
     }
   };
+  const { cookies } = useCookies();
 
   const collapse = computed(() => {
     return asideWidth.value !== '200px';
@@ -94,6 +96,11 @@
       case 'sign_out':
         router.push({ name: 'login' });
         window.localStorage.clear();
+        cookies.remove('user_id');
+        cookies.remove('is_admin');
+        cookies.remove('nickname');
+        cookies.remove('a_token');
+        cookies.remove('r_token');
         ElMessage.info('退出成功');
         break;
       case 'modify_pw':

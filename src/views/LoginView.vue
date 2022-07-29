@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="loginPage">
     <div class="loginBox">
       <div class="imgDiv">
         <el-avatar v-model:src="avatar" :size="100" shape="circle" />
@@ -42,6 +42,7 @@
   import { reqUserSignIn } from '@/api/userApi';
   import { Code_Success } from '@/app/codes';
   import { useRouter } from 'vue-router';
+  import { useCookies } from 'vue3-cookies';
   import useUserStore from '@/store/module/useUserStore';
 
   const loginForm = reactive({
@@ -77,6 +78,7 @@
   const formEl = ref<HTMLFormElement | null>(null);
   const router = useRouter();
   const userStore = useUserStore();
+  const { cookies } = useCookies();
 
   const handlerLogin = (e: Event) => {
     e.preventDefault();
@@ -88,6 +90,11 @@
           ElMessage.success(msg);
           userStore.sign_in(data);
           await router.push({ name: 'Dashboard' });
+          cookies.set('user_id', data.user_id);
+          cookies.set('is_admin', data.is_admin);
+          cookies.set('nickname', data.nickname);
+          cookies.set('a_token', data.a_token);
+          cookies.set('r_token', data.r_token);
           return;
         }
       } catch (e: any) {
@@ -98,12 +105,10 @@
 </script>
 
 <style scoped>
-  .container {
-    background-color: #282c34;
+  .loginPage {
     @apply w-full;
     @apply h-full;
     @apply bg-gray-700;
-    max-width: 100vh;
   }
 
   .loginBox {
