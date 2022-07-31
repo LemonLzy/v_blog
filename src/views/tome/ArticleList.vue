@@ -5,7 +5,7 @@
         <h4 class="font-bold text-xl">文章列表</h4>
       </template>
       <template #default>
-        <el-table :data="list">
+        <el-table v-loading="loading" :data="list">
           <el-table-column
             v-for="(item, i) in columns"
             :key="i"
@@ -59,7 +59,11 @@
   const formParam = reactive({ page: 1, size: 10 });
 
   const { articleList } = useArticle();
-  const { list, total } = articleList(toRef(formParam, 'page'), toRef(formParam, 'size'), true);
+  const { loading, list, total } = articleList(
+    toRef(formParam, 'page'),
+    toRef(formParam, 'size'),
+    true,
+  );
 
   const handlePageChange = (p: number) => {
     formParam.page = p;
