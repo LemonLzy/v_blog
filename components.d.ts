@@ -14,21 +14,23 @@ declare module '@vue/runtime-core' {
     ElCheckboxGroup: typeof import('element-plus/es')['ElCheckboxGroup'];
     ElCol: typeof import('element-plus/es')['ElCol'];
     ElContainer: typeof import('element-plus/es')['ElContainer']
+    ElDialog: typeof import('element-plus/es')['ElDialog']
     ElDropdown: typeof import('element-plus/es')['ElDropdown']
     ElDropdownItem: typeof import('element-plus/es')['ElDropdownItem']
     ElDropdownMenu: typeof import('element-plus/es')['ElDropdownMenu']
     ElFooter: typeof import('element-plus/es')['ElFooter'];
-    ElForm: typeof import('element-plus/es')['ElForm'];
-    ElFormItem: typeof import('element-plus/es')['ElFormItem'];
+    ElForm: typeof import('element-plus/es')['ElForm']
+    ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElHeader: typeof import('element-plus/es')['ElHeader']
     ElIcon: typeof import('element-plus/es')['ElIcon']
-    ElInput: typeof import('element-plus/es')['ElInput'];
+    ElInput: typeof import('element-plus/es')['ElInput']
     ElMain: typeof import('element-plus/es')['ElMain']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
     ElMenuItemGroup: typeof import('element-plus/es')['ElMenuItemGroup'];
     ElOption: typeof import('element-plus/es')['ElOption'];
     ElPagination: typeof import('element-plus/es')['ElPagination']
+    ElPopconfirm: typeof import('element-plus/es')['ElPopconfirm']
     ElRow: typeof import('element-plus/es')['ElRow'];
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar'];
     ElSelect: typeof import('element-plus/es')['ElSelect'];

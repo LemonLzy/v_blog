@@ -1,7 +1,7 @@
 import useHTTP from '@/api/useHTTP';
 import { BasicResp } from '@/api/types';
 
-interface ParamSignUp {
+export interface ParamSignUp {
   username: string;
   password: string;
   re_password: string;
@@ -33,6 +33,19 @@ export const reqUserSignIn = (params: ParamSignIn) => {
   //axios http
   return useHTTP<BasicResp<RespSignIn>>({
     url: `/api/sign_in`,
+    method: 'post',
+    data: { ...params },
+  });
+};
+
+export interface ParamUserDel {
+  user_id: number;
+}
+
+export const reqUserDel = (params: ParamUserDel) => {
+  //axios http
+  return useHTTP<BasicResp<null>>({
+    url: `/api/user/del`,
     method: 'post',
     data: { ...params },
   });
