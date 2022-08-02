@@ -3,20 +3,14 @@
     <el-container>
       <el-header>Header</el-header>
       <el-main>
-        <el-row v-for="article in article_list" :span="8">
+        <el-row v-for="article in article_list" :key="article.article_id" :span="8">
           <el-col>
             <el-card :body-style="{ padding: '0px' }">
-              <img src="article.cover" class="image" alt="文章图片" />
+              <el-image style="width: 100px; height: 100px" :src="article.cover" />
               <div class="title">
                 <h1>
                   <strong>{{ article.title }}</strong>
                 </h1>
-
-<!--                <div class="bottom">-->
-<!--                  <time class="time">{{ currentDate }}</time>-->
-
-<!--                  <el-button text class="button">Operating</el-button>-->
-<!--                </div>-->
               </div>
               <div class="summary">
                 <span>{{ article.summary }}</span>
@@ -61,13 +55,13 @@
   ]);
 
   // 发起接口请求
-
 </script>
 
 <style scoped>
   .title {
     padding: 14px;
   }
+
   .summary {
     padding: 14px;
   }
@@ -99,4 +93,3 @@
 <!--]-->
 <!--}-->
 <!--}-->
-
