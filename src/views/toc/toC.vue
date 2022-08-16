@@ -1,15 +1,21 @@
 <template>
   <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" :ellipsis="false">
-    <el-menu-item index="0">LOGO</el-menu-item>
+    <el-menu-item index="0">Lemon</el-menu-item>
     <div class="flex-grow" />
-    <el-menu-item index="1">Processing Center</el-menu-item>
+    <el-menu-item index="1">Tags</el-menu-item>
     <el-menu-item index="2">About Me</el-menu-item>
   </el-menu>
   <el-row>
     <el-col :span="3"></el-col>
     <el-col :span="15">
-      <CardArticleInfo :article-list="articleList" />
-      <common-page class="page" :total="100" />
+      <CardArticleInfo :article-list="list" />
+      <common-page
+        class="page"
+        :total="total"
+        :size="formParam.size"
+        :page="formParam.page"
+        @current-change="handlePageChange"
+      />
     </el-col>
     <el-col :span="1"></el-col>
     <el-col :span="4">
@@ -42,48 +48,23 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
+  import { reactive, ref, toRef } from 'vue';
   import CardUserInfo from '@/components/toc/CardUserInfo.vue';
   import CardNotice from '@/components/toc/CardNotice.vue';
   import CardArticleInfo from '@/components/toc/CardArticleInfo.vue';
   import CommonPage from '@/components/common/CommonPage.vue';
+  import useArticle from '@/hooks/api/useArticle';
 
   const activeIndex = ref('0');
+  const formParam = reactive({ page: 1, size: 10 });
 
-  const articleList = ref([
-    {
-      tag_id: 2,
-      article_id: 2397673181155328,
-      title: '测试article1',
-      summary: '文章摘要1',
-      cover: 'https://lemonlzy.cn/img/lemonlzy.jpg',
-      created_at: 1653490049,
-    },
-    {
-      tag_id: 2,
-      article_id: 2397673181155328,
-      title: '测试article1',
-      summary: '文章摘要1',
-      cover: 'https://lemonlzy.cn/img/lemonlzy.jpg',
-      created_at: 1653490049,
-    },
-    {
-      tag_id: 3,
-      article_id: 2397673181155328,
-      title: '测试article1',
-      summary: '文章摘要1',
-      cover: 'https://lemonlzy.cn/img/lemonlzy.jpg',
-      created_at: 1653490049,
-    },
-    {
-      tag_id: 3,
-      article_id: 2397673181155328,
-      title: '测试article1',
-      summary: '文章摘要1',
-      cover: 'https://lemonlzy.cn/img/lemonlzy.jpg',
-      created_at: 1653490049,
-    },
-  ]);
+  const { articleList } = useArticle();
+  const { list, total } = articleList(toRef(formParam, 'page'), toRef(formParam, 'size'), true);
+
+  const handlePageChange = (p: number) => {
+    formParam.page = p;
+    window.scrollTo(0, 0);
+  };
 </script>
 
 <style lang="scss" scoped>

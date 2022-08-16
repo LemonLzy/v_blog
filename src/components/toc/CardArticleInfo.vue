@@ -6,7 +6,7 @@
   >
     <el-row>
       <el-col :span="10">
-        <el-image :src="article.cover" :fit="fit" />
+        <el-image :src="article.cover" :fit="fit" lazy />
       </el-col>
       <el-col :span="14">
         <div class="content">
@@ -30,7 +30,6 @@
 <script lang="ts" setup>
   const articleInfo = defineProps<{
     articleList: {
-      tag_id: number;
       article_id: number;
       title: string;
       summary: string;

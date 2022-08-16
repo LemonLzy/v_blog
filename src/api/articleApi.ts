@@ -10,8 +10,10 @@ export interface ArticleInfo {
   article_id: number;
   status: boolean;
   title: string;
-  created_at: string;
-  updated_at: string;
+  summary: string;
+  cover: string;
+  created_at: number;
+  updated_at: number;
 }
 
 export const reqArticleList = (page: number, size: number) => {

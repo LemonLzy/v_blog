@@ -1,10 +1,18 @@
 <template>
-  <el-pagination background layout="prev, pager, next" :total="page.total" />
+  <el-pagination
+    background
+    layout="prev, pager, next"
+    :total="pagination.total"
+    :page-size="pagination.size"
+    :current-page="pagination.page"
+  />
 </template>
 
 <script lang="ts" setup>
-  const page = defineProps<{
+  const pagination = defineProps<{
     total: number;
+    size: number;
+    page: number;
   }>();
 </script>
 
