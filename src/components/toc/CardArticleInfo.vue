@@ -37,7 +37,7 @@
       created_at: number;
     }[];
   }>();
-  const fit = 'contain';
+  const fit = 'scale-down';
 </script>
 
 <style lang="scss" scoped>
