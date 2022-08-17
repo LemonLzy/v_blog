@@ -1,9 +1,9 @@
 <template>
   <el-card class="user-card">
     <el-image
-      class="userAvatar"
+      class="avatar-img"
       :src="userInfo.avatar"
-      :fit="'contain'"
+      :fit="'scale-down'"
       :preview-src-list="userInfo.avatar"
       :hide-on-click-modal="true"
       lazy
@@ -31,12 +31,18 @@
 </script>
 
 <style lang="scss" scoped>
-  .userAvatar {
+  .avatar-img {
     height: 150px;
     @apply flex items-center justify-between;
   }
 
   .el-card {
     @apply rounded-xl;
+  }
+
+  .avatar-img:hover {
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+    transition: all 0.375s;
   }
 </style>

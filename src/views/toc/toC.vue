@@ -17,8 +17,8 @@
     <el-image class="img_main_cover" :src="'https://lemonlzy.cn/img/index.jpg'" :fit="'cover'" />
   </div>
   <el-row id="scrollElRow">
-    <el-col :span="3"></el-col>
-    <el-col :span="15">
+    <el-col :span="4"></el-col>
+    <el-col :span="12">
       <CardArticleInfo class="cardArticleInfo" :article-list="list" />
       <common-page
         class="page"
