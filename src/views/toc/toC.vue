@@ -32,8 +32,8 @@
     <el-col :span="4">
       <CardUserInfo
         avatar="https://lemonlzy.cn/img/lemonlzy.jpg"
-        nickname="xxx"
-        signature="xxx"
+        nickname="Monkey·D·Luffy"
+        signature="Show me the code."
         category="xxx"
         tags="xxx"
         article-total="10"

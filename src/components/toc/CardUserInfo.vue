@@ -13,12 +13,14 @@
     <div class="articleTotal">{{ userInfo.articleTotal }}</div>
     <div class="tags">{{ userInfo.tags }}</div>
     <div class="category">{{ userInfo.category }}</div>
-    <div>Follow Me</div>
+    <el-link class="follow" :icon="Edit" :underline="false">Follow Me</el-link>
     <div class="link">{{ userInfo.link }}</div>
   </el-card>
 </template>
 
 <script lang="ts" setup>
+  import { Edit } from '@element-plus/icons-vue';
+
   const userInfo = defineProps<{
     avatar: string;
     nickname: string;
@@ -31,18 +33,38 @@
 </script>
 
 <style lang="scss" scoped>
-  .avatar-img {
-    height: 150px;
-    @apply flex items-center justify-between;
-  }
-
   .el-card {
     @apply rounded-xl;
-  }
 
-  .avatar-img:hover {
-    -ms-transform: rotate(360deg);
-    transform: rotate(360deg);
-    transition: all 0.375s;
+    .avatar-img {
+      height: 110px;
+      @apply flex items-center justify-between;
+    }
+
+    .avatar-img:hover {
+      -ms-transform: rotate(360deg);
+      transform: rotate(360deg);
+      transition: all 0.375s;
+    }
+
+    .nickname {
+      @apply flex text-lg justify-center items-center;
+    }
+
+    .signature {
+      @apply flex text-xs justify-center items-center;
+    }
+
+    .follow {
+      @apply w-full;
+      background-color: #49b1f5;
+      height: 34px;
+      margin: 5px;
+      color: #ffffff;
+    }
+
+    .follow:hover {
+      background-color: #ff7242;
+    }
   }
 </style>
