@@ -13,13 +13,13 @@
     <div class="articleTotal">{{ userInfo.articleTotal }}</div>
     <div class="tags">{{ userInfo.tags }}</div>
     <div class="category">{{ userInfo.category }}</div>
-    <el-link class="follow" :icon="Edit" :underline="false">Follow Me</el-link>
+    <el-link class="follow" :icon="Platform" :underline="false">Follow Me</el-link>
     <div class="link">{{ userInfo.link }}</div>
   </el-card>
 </template>
 
 <script lang="ts" setup>
-  import { Edit } from '@element-plus/icons-vue';
+  import { Platform } from '@element-plus/icons-vue';
 
   const userInfo = defineProps<{
     avatar: string;

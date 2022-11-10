@@ -89,7 +89,7 @@
         if (code === Code_Success) {
           ElMessage.success(msg);
           userStore.sign_in(data);
-          await router.push({ name: 'Dashboard' });
+          await router.push({ name: 'me' });
           cookies.set('user_id', data.user_id);
           cookies.set('is_admin', data.is_admin);
           cookies.set('nickname', data.nickname);

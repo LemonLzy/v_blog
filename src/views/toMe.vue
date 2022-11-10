@@ -1,28 +1,22 @@
 <template>
   <el-container>
     <el-header>
-      <el-menu
-        :default-active="activeIndex"
-        class="el-menu-demo"
-        mode="horizontal"
-        :ellipsis="false"
-        @select="handleSelect"
-      >
+      <el-menu class="el-menu-demo" mode="horizontal" :ellipsis="false" @select="handleSelect">
         <el-menu-item index="0">V-Blog</el-menu-item>
         <div class="flex-grow" />
-        <el-menu-item index="1">Processing Center</el-menu-item>
-        <el-sub-menu index="2">
-          <template #title>Workspace</template>
-          <el-menu-item index="2-1">item one</el-menu-item>
-          <el-menu-item index="2-2">item two</el-menu-item>
-          <el-menu-item index="2-3">item three</el-menu-item>
-          <el-sub-menu index="2-4">
-            <template #title>item four</template>
-            <el-menu-item index="2-4-1">item one</el-menu-item>
-            <el-menu-item index="2-4-2">item two</el-menu-item>
-            <el-menu-item index="2-4-3">item three</el-menu-item>
-          </el-sub-menu>
-        </el-sub-menu>
+        <el-dropdown trigger="click" @command="handleSelect">
+          <el-avatar
+            alt="Avatar"
+            src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+            class="avatar"
+          />
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item command="modify_pw">修改密码</el-dropdown-item>
+              <el-dropdown-item command="sign_out">退出登录</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
       </el-menu>
     </el-header>
   </el-container>
@@ -101,18 +95,39 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
   import { Menu as IconMenu, Message, Setting } from '@element-plus/icons-vue';
+  import { ElMessage } from 'element-plus/es';
+  import { useCookies } from 'vue3-cookies';
+  import { useRouter } from 'vue-router';
 
-  const activeIndex = ref('2');
-  const handleSelect = (key: string, keyPath: string[]) => {
-    console.log(key, keyPath);
+  const { cookies } = useCookies();
+  const router = useRouter();
+
+  const handleSelect = (c: string) => {
+    switch (c) {
+      case 'sign_out':
+        router.push({ name: 'login' });
+        window.localStorage.clear();
+        cookies.remove('user_id');
+        cookies.remove('is_admin');
+        cookies.remove('nickname');
+        cookies.remove('a_token');
+        cookies.remove('r_token');
+        ElMessage.info('退出成功');
+        break;
+      case 'modify_pw':
+        break;
+    }
   };
 </script>
 
 <style scoped>
   .flex-grow {
     flex-grow: 1;
+  }
+
+  .el-dropdown {
+    @apply flex items-center justify-between;
   }
 
   .layout-container-demo .el-header {
