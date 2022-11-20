@@ -1,11 +1,13 @@
 import { Method } from 'axios';
 import requests from '@/api/requests';
+import { AxiosRequestHeaders } from 'axios';
 
 export interface HTTPConfig {
   url: string;
   method: Method;
   data?: { [key: string]: unknown };
   params?: { [key: string]: unknown };
+  headers?: AxiosRequestHeaders;
 }
 
 const useHTTP = <T>(config: HTTPConfig): Promise<T> => {
@@ -15,6 +17,7 @@ const useHTTP = <T>(config: HTTPConfig): Promise<T> => {
       method: config.method,
       data: config.data || {},
       params: config.params || {},
+      headers: config.headers || { 'Content-Type': 'application/json' },
     })
       .then((resp) => {
         resolve(resp.data);

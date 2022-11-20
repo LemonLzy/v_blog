@@ -12,6 +12,15 @@ const requests = axios.create({
 //请求拦截器
 requests.interceptors.request.use((config) => {
   config = config || {};
+  // @ts-ignore
+  if (config.headers['Content-Type'] === 'multipart/form-data') {
+    let form = new FormData(); // 构造函数 解决传递头部参数格式不正确
+    for (let key in config.data) {
+      form.append(key, config.data[key]);
+    }
+    config.data = form;
+  }
+
   let UserInfo = {
     r_token: useCookies().cookies.get('r_token'),
     a_token: useCookies().cookies.get('a_token'),
@@ -19,7 +28,6 @@ requests.interceptors.request.use((config) => {
   try {
     if (UserInfo.r_token) {
       config.headers!['Authorization'] = `Bearer ${UserInfo.a_token}`;
-      console.log(UserInfo.a_token);
     }
   } catch (e) {
     console.log(e);

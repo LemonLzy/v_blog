@@ -24,3 +24,22 @@ export const reqArticleList = (page: number, size: number) => {
     params: { page, size },
   });
 };
+
+export interface ArticleCreateData {
+  tag_id: number;
+  status: number;
+  user_id: number;
+  title: string;
+  content: string;
+  rich_text: string;
+  cover: string;
+}
+
+export const reqArticleCreate = (params: ArticleCreateData) => {
+  //axios http
+  return useHTTP<BasicResp<null>>({
+    url: `/api/article`,
+    method: 'post',
+    data: { ...params },
+  });
+};

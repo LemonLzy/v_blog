@@ -1,56 +1,63 @@
 <template>
   <el-row>
     <el-col :span="16">
-      <TEditor ref="editor" v-model="ruleForm.desc"></TEditor>
+      <!--      <TEditor ref="editor" v-model="ArticleForm.content"></TEditor>-->
+      <EditorMarkdown v-model="ArticleForm.rich_text" height="80" content=""></EditorMarkdown>
     </el-col>
     <el-col :span="8">
       <el-form
         ref="ruleFormRef"
-        :model="ruleForm"
+        :model="ArticleForm"
         :rules="rules"
         label-width="120px"
         class="demo-ruleForm"
         :size="formSize"
         status-icon
       >
-        <el-form-item label="Activity name" prop="name">
-          <el-input v-model="ruleForm.name" />
+        <el-form-item label="Title" prop="title">
+          <el-input v-model="ArticleForm.title" />
         </el-form-item>
-        <el-form-item label="Activity zone" prop="region">
-          <el-select v-model="ruleForm.region" placeholder="Activity zone">
-            <el-option label="Zone one" value="shanghai" />
-            <el-option label="Zone two" value="beijing" />
+        <el-form-item label="Status" prop="status">
+          <el-select v-model="ArticleForm.status" placeholder="Please select status of blog.">
+            <el-option
+              v-for="item in statusList"
+              :key="item.key"
+              :label="item.label"
+              :value="item.value"
+            />
           </el-select>
         </el-form-item>
         <el-form-item label="Instant delivery" prop="delivery">
-          <el-switch v-model="ruleForm.delivery" />
+          <el-switch v-model="ArticleForm.status" />
         </el-form-item>
-        <el-form-item label="Activity type" prop="type">
-          <el-checkbox-group v-model="ruleForm.type">
-            <el-checkbox label="Online activities" name="type" />
-            <el-checkbox label="Promotion activities" name="type" />
-            <el-checkbox label="Offline activities" name="type" />
-            <el-checkbox label="Simple brand exposure" name="type" />
-          </el-checkbox-group>
+        <el-form-item label="Instant delivery" prop="delivery">
+          <el-select v-model="ArticleForm.tag_id" placeholder="Please select status of blog.">
+            <el-option
+              v-for="item in statusList"
+              :key="item.key"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
         </el-form-item>
         <el-form-item label="Upload Cover" prop="upload">
-          <el-upload
-            class="upload-demo"
-            drag
-            action="https://jsonplaceholder.typicode.com/posts/"
-            multiple
-          >
-            <el-icon class="el-icon--upload">
-              <upload-filled />
-            </el-icon>
-            <div class="el-upload__text">
-              Drop file here or
-              <em>click to upload</em>
-            </div>
-            <template #tip>
-              <div class="el-upload__tip">jpg/png files with a size less than 500kb</div>
-            </template>
-          </el-upload>
+          <!--          <el-upload-->
+          <!--            class="upload-demo"-->
+          <!--            drag-->
+          <!--            action="https://jsonplaceholder.typicode.com/posts/"-->
+          <!--            multiple-->
+          <!--          >-->
+          <!--            <el-icon class="el-icon&#45;&#45;upload">-->
+          <!--              <upload-filled />-->
+          <!--            </el-icon>-->
+          <!--            <div class="el-upload__text">-->
+          <!--              Drop file here or-->
+          <!--              <em>click to upload</em>-->
+          <!--            </div>-->
+          <!--            <template #tip>-->
+          <!--              <div class="el-upload__tip">jpg/png files with a size less than 500kb</div>-->
+          <!--            </template>-->
+          <!--          </el-upload>-->
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm(ruleFormRef)">Create</el-button>
@@ -65,41 +72,34 @@
   import { reactive, ref } from 'vue';
   import type { FormInstance, FormRules } from 'element-plus';
   import { UploadFilled } from '@element-plus/icons-vue';
-  import TEditor from '@/components/common/TinyMce.vue';
+  import { reqArticleCreate } from '@/api/articleApi';
+  import { Code_Success } from '@/app/codes';
+  import { ElMessage } from 'element-plus/es';
+  import { useCookies } from 'vue3-cookies';
+  import EditorMarkdown from '@/components/common/EditorMarkdown.vue';
 
   const formSize = ref('default');
   const ruleFormRef = ref<FormInstance>();
-  const ruleForm = reactive({
-    name: 'Hello',
-    region: '',
-    count: '',
-    date1: '',
-    date2: '',
-    delivery: false,
-    type: [],
-    resource: '',
-    desc: '',
-  });
 
   const rules = reactive<FormRules>({
-    name: [
+    title: [
       {
         required: true,
         message: 'Please input Activity name',
         trigger: 'blur',
       },
       {
-        min: 3,
-        max: 5,
-        message: 'Length should be 3 to 5',
+        min: 1,
+        max: 50,
+        message: 'Length should be 1 to 50',
         trigger: 'blur',
       },
     ],
-    region: [
+    status: [
       {
         required: true,
         message: 'Please select Activity zone',
-        trigger: 'change',
+        trigger: 'blur',
       },
     ],
     count: [
@@ -109,27 +109,10 @@
         trigger: 'change',
       },
     ],
-    date1: [
+    tag: [
       {
-        type: 'date',
         required: true,
-        message: 'Please pick a date',
-        trigger: 'change',
-      },
-    ],
-    date2: [
-      {
-        type: 'date',
-        required: true,
-        message: 'Please pick a time',
-        trigger: 'change',
-      },
-    ],
-    type: [
-      {
-        type: 'array',
-        required: true,
-        message: 'Please select at least one activity type',
+        message: 'Please select at least one tag',
         trigger: 'change',
       },
     ],
@@ -147,20 +130,54 @@
         trigger: 'blur',
       },
     ],
-    upload: [
-      {
-        required: true,
-        message: 'Please upload Article Cover Img',
-        trigger: 'change',
-      },
-    ],
+    // upload: [
+    //   {
+    //     required: true,
+    //     message: 'Please upload Article Cover Img',
+    //     trigger: 'change',
+    //   },
+    // ],
   });
+  const { cookies } = useCookies();
+
+  const ArticleForm = reactive({
+    tag_id: ref(),
+    status: ref(),
+    user_id: Number(cookies.get('user_id')),
+    title: ref(''),
+    content: '',
+    rich_text: '',
+    cover: '',
+  });
+
+  const statusList = [
+    {
+      key: '0',
+      value: 0,
+      label: '草稿',
+    },
+    {
+      key: '1',
+      value: 1,
+      label: '直接发布',
+    },
+  ];
 
   const submitForm = async (formEl: FormInstance | undefined) => {
     if (!formEl) return;
-    await formEl.validate((valid, fields) => {
+    await formEl.validate(async (valid, fields) => {
+      console.log(ArticleForm);
       if (valid) {
-        console.log('submit!');
+        try {
+          let { code, msg } = await reqArticleCreate(ArticleForm);
+          if (code === Code_Success) {
+            ElMessage.success('新建文章' + msg);
+            resetForm(formEl);
+            return;
+          }
+        } catch (e: any) {
+          ElMessage.error(e.message);
+        }
       } else {
         console.log('error submit!', fields);
       }

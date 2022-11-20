@@ -8,11 +8,12 @@ import '@/assets/styles/app.scss';
 import '@purge-icons/generated';
 import 'element-plus/dist/index.css';
 import VueCookies from 'vue3-cookies';
+import EditorMarkdown from '@/components/common/EditorMarkdown.vue';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 
 const pinia = createPinia();
 
-let app = createApp(App);
+const app = createApp(App);
 app.use(router);
 
 app.use(VueCookies, {
@@ -29,4 +30,6 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 
 app.use(pinia);
 app.use(ElementPlus, { locale: zhCn });
+app.component('EditorMarkdown', EditorMarkdown);
+
 app.mount('#app');
