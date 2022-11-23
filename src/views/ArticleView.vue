@@ -41,23 +41,22 @@
           </el-select>
         </el-form-item>
         <el-form-item label="Upload Cover" prop="upload">
-          <!--          <el-upload-->
-          <!--            class="upload-demo"-->
-          <!--            drag-->
-          <!--            action="https://jsonplaceholder.typicode.com/posts/"-->
-          <!--            multiple-->
-          <!--          >-->
-          <!--            <el-icon class="el-icon&#45;&#45;upload">-->
-          <!--              <upload-filled />-->
-          <!--            </el-icon>-->
-          <!--            <div class="el-upload__text">-->
-          <!--              Drop file here or-->
-          <!--              <em>click to upload</em>-->
-          <!--            </div>-->
-          <!--            <template #tip>-->
-          <!--              <div class="el-upload__tip">jpg/png files with a size less than 500kb</div>-->
-          <!--            </template>-->
-          <!--          </el-upload>-->
+          <el-upload
+            class="upload-demo"
+            drag
+            :action="uploadURL"
+            multiple
+            limit="1"
+            list-type="picture"
+          >
+            <el-icon class="el-icon--upload">
+              <upload-filled />
+            </el-icon>
+            <div class="el-upload__text">
+              Drop file here or
+              <em>click to upload</em>
+            </div>
+          </el-upload>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm(ruleFormRef)">Create</el-button>
@@ -78,6 +77,7 @@
   import { useCookies } from 'vue3-cookies';
   import EditorMarkdown from '@/components/common/EditorMarkdown.vue';
 
+  const uploadURL = import.meta.env.VITE_API_URL + '/api/upload_image';
   const formSize = ref('default');
   const ruleFormRef = ref<FormInstance>();
 
