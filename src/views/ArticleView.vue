@@ -1,7 +1,7 @@
 <template>
-  <el-row>
+  <el-scrollbar class="main-scroll">
+    <el-row>
     <el-col :span="16">
-      <!--      <TEditor ref="editor" v-model="ArticleForm.content"></TEditor>-->
       <EditorMarkdown v-model="ArticleForm.rich_text" height="80" content=""></EditorMarkdown>
     </el-col>
     <el-col :span="8">
@@ -30,10 +30,10 @@
         <el-form-item label="Instant delivery" prop="delivery">
           <el-switch v-model="ArticleForm.status" />
         </el-form-item>
-        <el-form-item label="Instant delivery" prop="delivery">
-          <el-select v-model="ArticleForm.tag_id" placeholder="Please select status of blog.">
+        <el-form-item label="delivery" prop="tag">
+          <el-select v-model="ArticleForm.tag_id" placeholder="Please select tag.">
             <el-option
-              v-for="item in statusList"
+              v-for="item in tagList"
               :key="item.key"
               :label="item.label"
               :value="item.value"
@@ -48,7 +48,12 @@
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload"
           >
-            <img v-if="ArticleForm.cover" :src="ArticleForm.cover" class="avatar" alt="show me the code." />
+            <img
+              v-if="ArticleForm.cover"
+              :src="ArticleForm.cover"
+              class="avatar"
+              alt="show me the code."
+            />
             <el-icon v-else class="avatar-uploader-icon">
               <Plus />
             </el-icon>
@@ -61,6 +66,7 @@
       </el-form>
     </el-col>
   </el-row>
+  </el-scrollbar>
 </template>
 
 <script lang="ts" setup>
@@ -126,13 +132,13 @@
         trigger: 'blur',
       },
     ],
-    // upload: [
-    //   {
-    //     required: true,
-    //     message: 'Please upload Article Cover Img',
-    //     trigger: 'change',
-    //   },
-    // ],
+    upload: [
+      {
+        required: true,
+        message: 'Please upload Article Cover Img',
+        trigger: 'change',
+      },
+    ],
   });
   const { cookies } = useCookies();
 
@@ -156,6 +162,18 @@
       key: '1',
       value: 1,
       label: '直接发布',
+    },
+  ];
+  const tagList = [
+    {
+      key: '0',
+      value: 0,
+      label: 'tag1',
+    },
+    {
+      key: '1',
+      value: 1,
+      label: 'tag2',
     },
   ];
 
@@ -198,6 +216,7 @@
   const resetForm = (formEl: FormInstance | undefined) => {
     if (!formEl) return;
     formEl.resetFields();
+    ArticleForm.rich_text = '';
   };
   Array.from({ length: 10000 }).map((_, idx) => ({
     value: `${idx + 1}`,
@@ -238,5 +257,12 @@
     width: 178px;
     height: 178px;
     text-align: center;
+  }
+
+  .main-scroll {
+    height: calc(100vh - 60px); /* 必须给外层设高度 滚动条才会显示 */
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
   }
 </style>

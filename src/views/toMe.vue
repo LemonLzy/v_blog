@@ -149,8 +149,7 @@
 
   .layout-container-demo .el-main {
     padding: 0;
-    height: calc(95vh - 60px);
-    overflow: scroll;
+    height: calc(100vh - 60px);
   }
 
   .layout-container-demo .toolbar {
