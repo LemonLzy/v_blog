@@ -11,6 +11,16 @@ const routes: RouteRecordRaw[] = [
     name: 'client',
     component: () => import('@/views/toc/toC.vue'),
   },
+  {
+    path: '/toc/test',
+    name: 'test',
+    component: () => import('@/components/toc/ArticlePreview.vue'),
+  },
+  {
+    path: '/toc/details',
+    name: 'details',
+    component: () => import('@/views/toc/toCDetail.vue'),
+  },
 ];
 
 export default routes;

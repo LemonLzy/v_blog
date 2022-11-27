@@ -7,6 +7,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AdminCardBox: typeof import('./src/components/common/AdminCardBox.vue')['default']
     AppIcon: typeof import('./src/components/common/AppIcon.vue')['default']
+    ArticlePreview: typeof import('./src/components/toc/ArticlePreview.vue')['default']
     CardArticleInfo: typeof import('./src/components/toc/CardArticleInfo.vue')['default']
     CardNotice: typeof import('./src/components/toc/CardNotice.vue')['default']
     CardTag: typeof import('./src/components/toc/CardTag.vue')['default']
