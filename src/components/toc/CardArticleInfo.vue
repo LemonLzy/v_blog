@@ -3,6 +3,8 @@
     v-for="article in articleInfo.articleList"
     :key="article.article_id"
     class="article-card"
+    style="cursor: pointer"
+    @click="toDetail(article.article_id)"
   >
     <el-row>
       <el-col :span="10">
@@ -28,9 +30,13 @@
 </template>
 
 <script lang="ts" setup>
+  import { reqArticleDetails } from '@/api/articleApi';
+  import { Code_Success } from '@/app/codes';
+  import { ElMessage } from 'element-plus/es';
+
   const articleInfo = defineProps<{
     articleList: {
-      article_id: number;
+      article_id: string;
       title: string;
       summary: string;
       cover: string;
@@ -38,6 +44,20 @@
     }[];
   }>();
   const fit = 'scale-down';
+
+  const toDetail = async (articleID: string) => {
+    try {
+      let { code, data, msg } = await reqArticleDetails(articleID);
+      if (code !== Code_Success) {
+        ElMessage.error(msg);
+        return;
+      }
+      ElMessage.success('获取文章详情' + msg);
+      return;
+    } catch (e: any) {
+      ElMessage.error(e.message);
+    }
+  };
 </script>
 
 <style lang="scss" scoped>

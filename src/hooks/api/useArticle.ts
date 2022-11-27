@@ -1,11 +1,11 @@
 import { ref, Ref, watch } from 'vue';
-import { ArticleInfo, reqArticleList } from '@/api/articleApi';
+import { ArticleListInfo, reqArticleList } from '@/api/articleApi';
 import { Code_Success } from '@/app/codes';
 
 // function + composition api = hooks，hooks就是类似于函数，提供对逻辑的复用，利用了vue3的响应式模块
 const useArticle = () => {
   const articleList = (page: Ref<number>, size: Ref<number>, immediate = false) => {
-    const list = ref<ArticleInfo[]>([]);
+    const list = ref<ArticleListInfo[]>([]);
     const total = ref(0);
     const loading = ref(false);
     const refresh = async () => {

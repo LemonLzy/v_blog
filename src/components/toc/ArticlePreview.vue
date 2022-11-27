@@ -11,7 +11,8 @@
   import '@kangc/v-md-editor/lib/style/preview-html.css';
   import '@kangc/v-md-editor/lib/theme/style/vuepress.css';
 
-  const html = '<h1 data-v-md-heading="测试" data-v-md-line="1">测试</h1>\n' +
+  const html =
+    '<h1 data-v-md-heading="测试" data-v-md-line="1">测试</h1>\n' +
     '<h3 data-v-md-heading="小张" data-v-md-line="2">小张</h3>\n' +
     '<hr data-v-md-line="3">\n' +
     '<blockquote data-v-md-line="4">\n' +
