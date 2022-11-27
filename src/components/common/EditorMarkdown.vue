@@ -1,7 +1,6 @@
 <template>
   <v-md-editor
-    v-model="value"
-    :height="markdown.height + 'vh'"
+    :height="80 + 'vh'"
     :include-level="[1, 2, 3]"
     :disabled-menus="[]"
     @upload-image="handleUploadImage"
@@ -9,9 +8,11 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed } from 'vue';
-
   import VMdEditor from '@kangc/v-md-editor';
+  import createTodoListPlugin from '@kangc/v-md-editor/lib/plugins/todo-list/index';
+  import createTipPlugin from '@kangc/v-md-editor/lib/plugins/tip/index';
+  import '@kangc/v-md-editor/lib/plugins/tip/tip.css';
+  import '@kangc/v-md-editor/lib/plugins/todo-list/todo-list.css';
   import '@kangc/v-md-editor/lib/style/base-editor.css';
   import githubTheme from '@kangc/v-md-editor/lib/theme/github.js';
   import '@kangc/v-md-editor/lib/theme/style/github.css';
@@ -33,22 +34,22 @@
   VMdEditor.use(githubTheme, {
     Hljs: hljs,
   });
+  VMdEditor.use(createTodoListPlugin());
+  VMdEditor.use(createTipPlugin());
 
-  const markdown = defineProps<{
-    content: string;
-    height: string;
+  defineProps<{
+    markdownContent?: string;
   }>();
+  defineEmits(['update:markdownContent']);
 
-  const emit = defineEmits(['update:content']);
-  const value = computed({
-    get() {
-      return markdown.content;
-    },
-    set(value) {
-      emit('update:content', value);
-    },
-  });
+  // const html = xss.process(VMdEditor.vMdParser.themeConfig.markdownParser.render(modelValue));
+  // console.log('html:', html);
 
+  // const emit = defineEmits();
+  // const change = (markdownContent, htmlContent) => {
+  //   emit('update:modelValue', markdownContent);
+  //   emit('htmlContent', htmlContent);
+  // };
   const handleUploadImage = async (event, insertImage, files) => {
     // 拿到 files 之后上传到文件服务器，然后向编辑框中插入对应的内容
     const req = {
@@ -65,16 +66,6 @@
       desc: files[0].name,
     });
   };
-  // const markdown = defineProps({
-  //   modelValue: {
-  //     type: String,
-  //     default: '',
-  //   },
-  //   height: {
-  //     type: Number,
-  //     default: 80,
-  //   },
-  // });
 </script>
 
 <style lang="scss">

@@ -18,7 +18,7 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: ['@kangc/v-md-editor/lib/theme/vuepress.js'],
+    include: ['@kangc/v-md-editor/lib/theme/vuepress.js', '@kangc/v-md-editor/lib/theme/github.js'],
   },
   plugins: [
     vue(),

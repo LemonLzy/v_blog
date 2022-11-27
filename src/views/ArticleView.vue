@@ -1,76 +1,90 @@
 <template>
   <el-scrollbar class="main-scroll">
     <el-row>
-    <el-col :span="16">
-      <EditorMarkdown v-model="ArticleForm.rich_text" height="80" content=""></EditorMarkdown>
-    </el-col>
-    <el-col :span="8">
-      <el-form
-        ref="ruleFormRef"
-        :model="ArticleForm"
-        :rules="rules"
-        label-width="120px"
-        class="demo-ruleForm"
-        :size="formSize"
-        status-icon
-      >
-        <el-form-item label="Title" prop="title">
-          <el-input v-model="ArticleForm.title" />
-        </el-form-item>
-        <el-form-item label="Status" prop="status">
-          <el-select v-model="ArticleForm.status" placeholder="Please select status of blog.">
-            <el-option
-              v-for="item in statusList"
-              :key="item.key"
-              :label="item.label"
-              :value="item.value"
-            />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="Instant delivery" prop="delivery">
-          <el-switch v-model="ArticleForm.status" />
-        </el-form-item>
-        <el-form-item label="delivery" prop="tag">
-          <el-select v-model="ArticleForm.tag_id" placeholder="Please select tag.">
-            <el-option
-              v-for="item in tagList"
-              :key="item.key"
-              :label="item.label"
-              :value="item.value"
-            />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="Upload Cover" prop="upload">
-          <el-upload
-            class="avatar-uploader"
-            :action="uploadURL"
-            :show-file-list="false"
-            :on-success="handleAvatarSuccess"
-            :before-upload="beforeAvatarUpload"
-          >
-            <img
-              v-if="ArticleForm.cover"
-              :src="ArticleForm.cover"
-              class="avatar"
-              alt="show me the code."
-            />
-            <el-icon v-else class="avatar-uploader-icon">
-              <Plus />
-            </el-icon>
-          </el-upload>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="submitForm(ruleFormRef)">Create</el-button>
-          <el-button @click="resetForm(ruleFormRef)">Reset</el-button>
-        </el-form-item>
-      </el-form>
-    </el-col>
-  </el-row>
+      <el-col :span="18">
+        <EditorMarkdown
+          v-model="ArticleForm.rich_text"
+        ></EditorMarkdown>
+      </el-col>
+      <el-col :span="6">
+        <el-form
+          ref="ruleFormRef"
+          :model="ArticleForm"
+          :rules="rules"
+          label-width="70px"
+          class="ruleForm"
+          :size="formSize"
+          status-icon
+        >
+          <el-form-item label="Title" prop="title">
+            <el-input v-model="ArticleForm.title" clearable />
+          </el-form-item>
+          <el-form-item label="Status" prop="status">
+            <el-select
+              v-model="ArticleForm.status"
+              placeholder="Please select status of blog."
+              clearable
+            >
+              <el-option
+                v-for="item in statusList"
+                :key="item.key"
+                :label="item.label"
+                :value="item.value"
+              />
+            </el-select>
+          </el-form-item>
+          <!--          <el-form-item label="Instant delivery" prop="delivery">-->
+          <!--            <el-switch v-model="ArticleForm.status" />-->
+          <!--          </el-form-item>-->
+          <!--          <el-form-item label="Tag" prop="tag">-->
+          <!--            <el-select-v2-->
+          <!--              v-model="ArticleForm.tag"-->
+          <!--              placeholder="tag"-->
+          <!--              :options="options"-->
+          <!--            />-->
+          <!--          </el-form-item>-->
+          <el-form-item label="Tag" prop="tag">
+            <el-select v-model="ArticleForm.tag" placeholder="Please select tag of blog." clearable>
+              <el-option
+                v-for="item in tagList"
+                :key="item.key"
+                :label="item.label"
+                :value="item.value"
+              />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="Cover" prop="cover">
+            <el-upload
+              class="avatar-uploader"
+              :action="uploadURL"
+              :show-file-list="false"
+              :on-success="handleAvatarSuccess"
+              :before-upload="beforeAvatarUpload"
+            >
+              <img
+                v-if="ArticleForm.cover"
+                :src="ArticleForm.cover"
+                class="avatar"
+                alt="show me the code."
+              />
+              <el-icon v-else class="avatar-uploader-icon">
+                <Plus />
+              </el-icon>
+            </el-upload>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="submitForm(ruleFormRef)">Create</el-button>
+            <el-button @click="resetForm(ruleFormRef)">Reset</el-button>
+          </el-form-item>
+        </el-form>
+      </el-col>
+    </el-row>
   </el-scrollbar>
 </template>
 
 <script lang="ts" setup>
   import { reactive, ref } from 'vue';
+  import VMdEditor, { xss } from '@kangc/v-md-editor';
   import type { FormInstance, FormRules, UploadProps } from 'element-plus';
   import { Plus } from '@element-plus/icons-vue';
   import { reqArticleCreate } from '@/api/articleApi';
@@ -104,35 +118,14 @@
         trigger: 'blur',
       },
     ],
-    count: [
-      {
-        required: false,
-        message: 'Please select Activity count',
-        trigger: 'change',
-      },
-    ],
     tag: [
       {
         required: true,
         message: 'Please select at least one tag',
-        trigger: 'change',
-      },
-    ],
-    resource: [
-      {
-        required: true,
-        message: 'Please select activity resource',
-        trigger: 'change',
-      },
-    ],
-    desc: [
-      {
-        required: true,
-        message: 'Please input activity form',
         trigger: 'blur',
       },
     ],
-    upload: [
+    cover: [
       {
         required: true,
         message: 'Please upload Article Cover Img',
@@ -143,13 +136,14 @@
   const { cookies } = useCookies();
 
   const ArticleForm = reactive({
-    tag_id: ref(),
+    tag: ref(),
     status: ref(),
     user_id: Number(cookies.get('user_id')),
     title: ref(''),
-    content: '',
     rich_text: '',
+    content: '',
     cover: '',
+    count: '',
   });
 
   const statusList = [
@@ -198,6 +192,10 @@
       console.log(ArticleForm);
       if (valid) {
         try {
+          ArticleForm.content = xss.process(
+            VMdEditor.vMdParser.themeConfig.markdownParser.render(ArticleForm.rich_text),
+          );
+          console.log('content', ArticleForm.content);
           let { code, msg } = await reqArticleCreate(ArticleForm);
           if (code === Code_Success) {
             ElMessage.success('新建文章' + msg);
@@ -217,17 +215,23 @@
     if (!formEl) return;
     formEl.resetFields();
     ArticleForm.rich_text = '';
+    ArticleForm.cover = '';
   };
-  Array.from({ length: 10000 }).map((_, idx) => ({
-    value: `${idx + 1}`,
-    label: `${idx + 1}`,
-  }));
 </script>
 
 <style scoped>
-  .el-form {
+  .ruleForm {
     height: 100vh;
-    margin: 20px;
+    margin-left: 50px;
+    margin-top: 20px;
+  }
+
+  .ruleForm .el-form-item .el-input {
+    width: 178px;
+  }
+
+  .ruleForm .el-form-item .el-select {
+    width: 178px;
   }
 
   .avatar-uploader .avatar {
