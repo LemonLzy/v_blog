@@ -46,7 +46,8 @@ export const reqArticleCreate = (params: ArticleCreateData) => {
 };
 
 export interface ArticleDetails {
-  htmlContent: string;
+  title: string;
+  content: string;
 }
 
 export const reqArticleDetails = (articleID: string) => {

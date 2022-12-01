@@ -30,10 +30,9 @@
 </template>
 
 <script lang="ts" setup>
-  import { reqArticleDetails } from '@/api/articleApi';
-  import { Code_Success } from '@/app/codes';
-  import { ElMessage } from 'element-plus/es';
+  import { useRouter } from 'vue-router';
 
+  const router = useRouter();
   const articleInfo = defineProps<{
     articleList: {
       article_id: string;
@@ -45,18 +44,8 @@
   }>();
   const fit = 'scale-down';
 
-  const toDetail = async (articleID: string) => {
-    try {
-      let { code, data, msg } = await reqArticleDetails(articleID);
-      if (code !== Code_Success) {
-        ElMessage.error(msg);
-        return;
-      }
-      ElMessage.success('获取文章详情' + msg);
-      return;
-    } catch (e: any) {
-      ElMessage.error(e.message);
-    }
+  const toDetail = (articleID: string) => {
+    router.push({ name: 'details', params: { id: articleID } });
   };
 </script>
 
