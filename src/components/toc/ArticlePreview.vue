@@ -1,7 +1,7 @@
 <template>
   <v-md-preview-html
     :html="html"
-    class="htmlContent"
+    class="htmlPreview"
     preview-class="vuepress-markdown-body"
   ></v-md-preview-html>
 </template>
@@ -17,7 +17,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .htmlContent {
+  .htmlPreview {
     max-width: 865px;
   }
 </style>

@@ -13,6 +13,9 @@ const useArticle = () => {
       let { data, code } = await reqArticleList(page.value, size.value);
       loading.value = false;
       if (code === Code_Success) {
+        for (let i = 0; i < data.list.length; i++) {
+          data.list[i].created_at = conversionTimestamp(data.list[i].created_at.valueOf());
+        }
         list.value = data.list || [];
         total.value = data.total || 0;
       }
@@ -37,5 +40,14 @@ const useArticle = () => {
     articleList,
   };
 };
+
+function conversionTimestamp(timestamp: string) {
+  let date = new Date(Number(timestamp) * 1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+  let Y = date.getFullYear() + '-';
+  let M = (date.getMonth() < 9 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+  let D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+
+  return Y + M + D;
+}
 
 export default useArticle;

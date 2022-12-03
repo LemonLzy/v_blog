@@ -3,21 +3,26 @@
     v-for="article in articleInfo.articleList"
     :key="article.article_id"
     class="article-card"
-    style="cursor: pointer"
-    @click="toDetail(article.article_id)"
   >
     <el-row>
-      <el-col :span="10">
+      <el-col :span="10" style="cursor: pointer" @click="toDetail(article.article_id)">
         <el-image :src="article.cover" :fit="fit" lazy />
       </el-col>
       <el-col :span="14">
         <div class="content">
           <el-row>
             <el-col>
-              <div class="title">{{ article.title }}</div>
+              <div class="title" style="cursor: pointer" @click="toDetail(article.article_id)">
+                {{ article.title }}
+              </div>
             </el-col>
-            <el-col>
-              <div class="pub_time">{{ article.created_at }}</div>
+            <el-col class="created">
+              <el-space>
+                <el-icon class="createdIcon" :size="13">
+                  <Calendar />
+                </el-icon>
+                <div class="createdText">发表于 {{ article.created_at }}</div>
+              </el-space>
             </el-col>
             <el-col>
               <div class="summary">{{ article.summary }}</div>
@@ -31,6 +36,7 @@
 
 <script lang="ts" setup>
   import { useRouter } from 'vue-router';
+  import { Calendar } from '@element-plus/icons';
 
   const router = useRouter();
   const articleInfo = defineProps<{
@@ -42,7 +48,8 @@
       created_at: number;
     }[];
   }>();
-  const fit = 'scale-down';
+
+  const fit = 'cover';
 
   const toDetail = (articleID: string) => {
     router.push({ name: 'details', params: { id: articleID } });
@@ -51,31 +58,47 @@
 
 <style lang="scss" scoped>
   .content {
-    @apply flex items-center justify-between;
+    margin-left: 30px;
+  }
 
-    .pub_time {
-      @apply text-xs;
+  .title {
+    @apply text-2xl;
+  }
+
+  .created {
+    margin-top: 10px;
+
+    .createdIcon {
+      color: #858585;
     }
+
+    .createdText {
+      @apply text-xs;
+      color: #858585;
+    }
+  }
+
+  .summary {
+    @apply text-sm;
   }
 
   .el-image {
     height: 180px;
+    transition: all 0.375s ease-in-out;
   }
 
-  .text {
-    font-size: 14px;
+  .el-image:hover {
+    transform: scale(1.1, 1.1);
   }
 
   .article-card {
     height: 220px;
-  }
-
-  .el-card {
     margin-top: 20px;
     @apply rounded-xl;
   }
 
-  .flex-grow {
-    flex-grow: 1;
+  ::selection {
+    background: #00c4b6;
+    color: #f7f7f7;
   }
 </style>

@@ -13,7 +13,7 @@ export interface ArticleListInfo {
   summary: string;
   cover: string;
   content: string;
-  created_at: number;
+  created_at: string;
   updated_at: number;
 }
 
