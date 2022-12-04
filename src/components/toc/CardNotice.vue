@@ -2,8 +2,8 @@
   <el-card class="user-card">
     <div class="item-headline">
       <div class="text-black flex items-center">
-        <el-icon class="item-headline-icon" color="#ff0000" :size="20">
-          <Lightning />
+        <el-icon class="item-headline-icon is-loading" color="#ff0000" :size="20">
+          <Sunny />
         </el-icon>
       </div>
       <div class="item-headline-title">公告</div>
@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { Lightning } from '@element-plus/icons';
+  import { Sunny } from '@element-plus/icons';
 
   const extraInfo = defineProps<{
     notice: string;

@@ -10,16 +10,39 @@
     />
     <div class="nickname">{{ userInfo.nickname }}</div>
     <div class="signature">{{ userInfo.signature }}</div>
-    <div class="articleTotal">{{ userInfo.articleTotal }}</div>
-    <div class="tags">{{ userInfo.tags }}</div>
-    <div class="category">{{ userInfo.category }}</div>
+    <el-row class="statistics">
+      <el-col :sm="6" class="articleTotal">
+        <el-row justify="center">文章</el-row>
+        <el-row justify="center">{{ userInfo.articleTotal }}</el-row>
+      </el-col>
+      <el-col :sm="6" class="tags">
+        <el-row justify="center">标签</el-row>
+        <el-row justify="center">{{ userInfo.tags }}</el-row>
+      </el-col>
+      <el-col :sm="6" class="category">
+        <el-row justify="center">分类</el-row>
+        <el-row justify="center">{{ userInfo.category }}</el-row>
+      </el-col>
+    </el-row>
     <el-link class="follow" :icon="Platform" :underline="false">Follow Me</el-link>
-    <div class="link">{{ userInfo.link }}</div>
+    <el-row class="extra-link">
+      <app-icon
+        icon="mdi:github"
+        class="github text-xl cursor-pointer"
+        :href="userInfo.link.github"
+      ></app-icon>
+      <app-icon
+        icon="clarity:email-solid"
+        class="email text-xl cursor-pointer"
+        :href="userInfo.link.email"
+      ></app-icon>
+    </el-row>
   </el-card>
 </template>
 
 <script lang="ts" setup>
-  import { Platform } from '@element-plus/icons-vue';
+  import { Platform } from '@element-plus/icons';
+  import AppIcon from '@/components/common/AppIcon.vue';
 
   const userInfo = defineProps<{
     avatar: string;
@@ -28,8 +51,13 @@
     articleTotal: string;
     tags: string;
     category: string;
-    link: string;
+    link: {
+      github: string;
+      email: string;
+    };
   }>();
+
+  console.log(userInfo);
 </script>
 
 <style lang="scss" scoped>
@@ -37,34 +65,77 @@
     @apply rounded-xl;
 
     .avatar-img {
-      height: 110px;
+      height: 100px;
+      margin-bottom: 10px;
+      background: rgba(0, 0, 0, 0);
       @apply flex items-center justify-between;
+      transition: filter 375ms ease-in 0.2s, transform 0.3s;
     }
 
     .avatar-img:hover {
       -ms-transform: rotate(360deg);
       transform: rotate(360deg);
-      transition: all 0.375s;
     }
 
     .nickname {
-      @apply flex text-lg justify-center items-center;
+      color: #4c4948;
+      font-weight: 500;
+      font-size: 1.4em;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      @apply flex justify-center items-center;
     }
 
     .signature {
-      @apply flex text-xs justify-center items-center;
+      margin-top: 5px;
+      color: #4c4948;
+      font-size: 14px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      line-height: 2;
+      @apply flex justify-center items-center;
+    }
+
+    .statistics {
+      @apply flex justify-center items-center;
+      margin-top: 13px;
+      color: #4c4948;
+      font-size: 1em;
     }
 
     .follow {
       @apply w-full;
+      margin-top: 14px;
       background-color: #49b1f5;
       height: 34px;
-      margin: 5px;
       color: #ffffff;
+      transition: all 0.2s ease-in-out;
     }
 
     .follow:hover {
       background-color: #ff7242;
+    }
+
+    .extra-link {
+      margin: 6px 0 -6px;
+      @apply flex justify-center items-center;
+
+      .github {
+        transition: filter 200ms ease-in 0.2s, transform 0.3s;
+      }
+
+      .github:hover {
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+
+      .email {
+        margin-left: 13px;
+        transition: filter 200ms ease-in 0.2s, transform 0.3s;
+      }
+
+      .email:hover {
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
     }
   }
 </style>

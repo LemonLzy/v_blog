@@ -49,7 +49,7 @@
     }[];
   }>();
 
-  const fit = 'cover';
+  const fit = 'scale-down';
 
   const toDetail = (articleID: string) => {
     router.push({ name: 'details', params: { id: articleID } });
@@ -58,11 +58,18 @@
 
 <style lang="scss" scoped>
   .content {
-    margin-left: 30px;
+    margin: 30px;
   }
 
   .title {
-    @apply text-2xl;
+    color: #1f2d3d;
+    font-size: 1.72em;
+    line-height: 1.4;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .title:hover {
+    color: #49b1f5;
   }
 
   .created {
@@ -79,7 +86,14 @@
   }
 
   .summary {
-    @apply text-sm;
+    font-size: 14px;
+    color: #4c4948;
+    line-height: 2;
+    display: -webkit-box; /*必须结合的属性,将对象作为弹性伸缩盒子模型显示*/
+    -webkit-line-clamp: 2; /*设置多少行*/
+    -webkit-box-orient: vertical; /*必须结合的属性,设置或检索伸缩盒对象的子元素的排列方式*/
+    overflow: hidden; /*文本会被修剪，并且剩余的部分不可见*/
+    text-overflow: ellipsis; /*显示省略号来代表被修剪的文本*/
   }
 
   .el-image {
@@ -95,10 +109,5 @@
     height: 220px;
     margin-top: 20px;
     @apply rounded-xl;
-  }
-
-  ::selection {
-    background: #00c4b6;
-    color: #f7f7f7;
   }
 </style>

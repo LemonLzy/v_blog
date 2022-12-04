@@ -34,10 +34,10 @@
         avatar="https://lemonlzy.cn/img/lemonlzy.jpg"
         nickname="Monkey·D·Luffy"
         signature="Show me the code."
-        category="xxx"
-        tags="xxx"
+        category="50"
+        tags="13"
         article-total="10"
-        link="xxx"
+        :link="link"
       />
       <CardNotice notice="欢迎访问xxx" />
       <el-card class="user-card">
@@ -69,6 +69,10 @@
 
   const activeIndex = ref('0');
   const formParam = reactive({ page: 1, size: 10 });
+  const link = reactive({
+    github: 'https://github.com/lemonlzy',
+    email: 'mailto:lzy291980138@163.com',
+  });
 
   const { articleList } = useArticle();
   const { list, total } = articleList(toRef(formParam, 'page'), toRef(formParam, 'size'), true);

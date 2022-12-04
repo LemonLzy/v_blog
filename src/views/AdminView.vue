@@ -62,7 +62,7 @@
 <script lang="ts" setup>
   import AppIcon from '@/components/common/AppIcon.vue';
   import { computed, ref } from 'vue';
-  import { Setting, UserFilled } from '@element-plus/icons-vue';
+  import { Setting, UserFilled } from '@element-plus/icons';
   import { useRouter } from 'vue-router';
   import { ElMessage } from 'element-plus';
   import { useCookies } from 'vue3-cookies';
