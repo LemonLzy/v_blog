@@ -13,6 +13,7 @@ declare module '@vue/runtime-core' {
     CardTag: typeof import('./src/components/toc/CardTag.vue')['default']
     CardUserInfo: typeof import('./src/components/toc/CardUserInfo.vue')['default']
     CommonPage: typeof import('./src/components/common/CommonPage.vue')['default']
+    CoverPreview: typeof import('./src/components/common/CoverPreview.vue')['default']
     EditorMarkdown: typeof import('./src/components/common/EditorMarkdown.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
@@ -48,6 +49,7 @@ declare module '@vue/runtime-core' {
     ElUpload: typeof import('element-plus/es')['ElUpload']
     HTMLPreview: typeof import('./src/components/toc/HTMLPreview.vue')['default']
     MarkdownPreview: typeof import('./src/components/toc/MarkdownPreview.vue')['default']
+    MenuHeader: typeof import('./src/components/common/MenuHeader.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

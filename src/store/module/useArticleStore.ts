@@ -15,7 +15,7 @@ export const KEY_ARTICLE_ID = 'article';
 const useUserStore = defineStore({
   id: KEY_ARTICLE_ID,
   state: (): Partial<ArticleInfo> => ({
-    tagID: '-1',
+    tag_id: '-1',
     status: '0',
     user_id: '0',
     title: '',

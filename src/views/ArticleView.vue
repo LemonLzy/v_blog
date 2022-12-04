@@ -2,9 +2,7 @@
   <el-scrollbar class="main-scroll">
     <el-row>
       <el-col :span="18">
-        <EditorMarkdown
-          v-model="ArticleForm.rich_text"
-        ></EditorMarkdown>
+        <EditorMarkdown v-model="ArticleForm.rich_text"></EditorMarkdown>
       </el-col>
       <el-col :span="6">
         <el-form
@@ -86,7 +84,7 @@
   import { reactive, ref } from 'vue';
   import VMdEditor, { xss } from '@kangc/v-md-editor';
   import type { FormInstance, FormRules, UploadProps } from 'element-plus';
-  import { Plus } from '@element-plus/icons-vue';
+  import { Plus } from '@element-plus/icons';
   import { reqArticleCreate } from '@/api/articleApi';
   import { Code_Success } from '@/app/codes';
   import { ElMessage } from 'element-plus/es';

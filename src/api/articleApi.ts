@@ -48,6 +48,7 @@ export const reqArticleCreate = (params: ArticleCreateData) => {
 export interface ArticleDetails {
   title: string;
   content: string;
+  cover: string;
 }
 
 export const reqArticleDetails = (articleID: string) => {

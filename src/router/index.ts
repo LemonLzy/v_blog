@@ -11,6 +11,9 @@ for (const path in modules) {
 const router = createRouter({
   history: createWebHashHistory(),
   routes: routes,
+  scrollBehavior() {
+    return { left: 0, top: 0 };
+  },
 });
 
 export default router;

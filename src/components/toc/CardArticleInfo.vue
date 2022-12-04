@@ -21,7 +21,7 @@
                 <el-icon class="createdIcon" :size="13">
                   <Calendar />
                 </el-icon>
-                <div class="createdText">发表于 {{ article.created_at }}</div>
+                <div class="dateText">发表于 {{ article.created_at }}</div>
               </el-space>
             </el-col>
             <el-col>
@@ -79,7 +79,7 @@
       color: #858585;
     }
 
-    .createdText {
+    .dateText {
       @apply text-xs;
       color: #858585;
     }

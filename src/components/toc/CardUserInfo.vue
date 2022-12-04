@@ -82,7 +82,8 @@
       color: #4c4948;
       font-weight: 500;
       font-size: 1.4em;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto,
+      'PingFang SC', 'Microsoft YaHei', sans-serif;
       @apply flex justify-center items-center;
     }
 
@@ -90,7 +91,8 @@
       margin-top: 5px;
       color: #4c4948;
       font-size: 14px;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto,
+      'PingFang SC', 'Microsoft YaHei', sans-serif;
       line-height: 2;
       @apply flex justify-center items-center;
     }

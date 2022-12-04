@@ -1,18 +1,5 @@
 <template>
-  <el-menu
-    :default-active="activeIndex"
-    class="el-menu-demo"
-    mode="horizontal"
-    :ellipsis="false"
-    text-color="#eeeeee"
-    background-color="transparent"
-    active-text-color="#eeeeee"
-  >
-    <el-menu-item index="0">Lemon</el-menu-item>
-    <div class="flex-grow" />
-    <el-menu-item index="1">Tags</el-menu-item>
-    <el-menu-item index="2">About Me</el-menu-item>
-  </el-menu>
+  <menu-header></menu-header>
   <div class="div_main_cover">
     <el-image class="img_main_cover" :src="'https://lemonlzy.cn/img/index.jpg'" :fit="'cover'" />
   </div>
@@ -60,14 +47,14 @@
 </template>
 
 <script lang="ts" setup>
-  import { reactive, ref, toRef } from 'vue';
+  import { reactive, toRef } from 'vue';
   import CardUserInfo from '@/components/toc/CardUserInfo.vue';
   import CardNotice from '@/components/toc/CardNotice.vue';
   import CardArticleInfo from '@/components/toc/CardArticleInfo.vue';
   import CommonPage from '@/components/common/CommonPage.vue';
   import useArticle from '@/hooks/api/useArticle';
+  import MenuHeader from '@/components/common/MenuHeader.vue';
 
-  const activeIndex = ref('0');
   const formParam = reactive({ page: 1, size: 10 });
   const link = reactive({
     github: 'https://github.com/lemonlzy',
@@ -108,28 +95,6 @@
   .page {
     margin: 20px;
     justify-content: center;
-  }
-
-  // 设置el-menu悬浮于背景图之上
-  .el-menu-demo {
-    @apply w-full;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: transparent;
-    border: transparent;
-    z-index: 9999;
-  }
-
-  // 设置el-menu的选中背景为透明背景
-  .el-menu--horizontal > .el-menu-item.is-active {
-    background: transparent;
-  }
-
-  // 设置el-menu的下边框为空
-  .el-menu--horizontal > .el-menu-item {
-    border-bottom: none;
-    text-decoration: none;
   }
 
   .el-image {

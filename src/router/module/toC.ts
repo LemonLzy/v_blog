@@ -12,11 +12,6 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/toc/toC.vue'),
   },
   {
-    path: '/toc/test',
-    name: 'test',
-    component: () => import('@/components/toc/HTMLPreview.vue'),
-  },
-  {
     path: '/toc/details/:id',
     name: 'details',
     component: () => import('@/views/toc/toCDetail.vue'),
