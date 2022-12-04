@@ -5,6 +5,7 @@ import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import PurgeIcons from 'vite-plugin-purge-icons';
+import prismjs from 'vite-plugin-prismjs';
 
 const resolve = (p: string) => {
   return path.resolve(__dirname, p);
@@ -30,6 +31,9 @@ export default defineConfig({
     }),
     PurgeIcons({
       content: ['**/*.html', '**/*.js', '**/*.vue'],
+    }),
+    prismjs({
+      languages: 'all',
     }),
   ],
   server: {

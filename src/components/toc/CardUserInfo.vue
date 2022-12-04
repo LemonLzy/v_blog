@@ -57,8 +57,6 @@
       email: string;
     };
   }>();
-
-  console.log(userInfo);
 </script>
 
 <style lang="scss" scoped>
@@ -126,7 +124,7 @@
     }
 
     .extra-link {
-      margin: 6px 0 -6px;
+      margin: 10px 0 -6px;
       @apply flex justify-center items-center;
 
       .github {
@@ -139,7 +137,7 @@
       }
 
       .email {
-        margin-left: 13px;
+        margin-left: 16px;
         transition: filter 200ms ease-in 0.2s, transform 0.3s;
       }
 

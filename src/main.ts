@@ -9,10 +9,7 @@ import '@purge-icons/generated';
 import 'element-plus/dist/index.css';
 import VueCookies from 'vue3-cookies';
 import EditorMarkdown from '@/components/common/EditorMarkdown.vue';
-import EditorPreview from '@/components/toc/ArticlePreview.vue';
-// import VMdPreviewHtml from '@kangc/v-md-editor/lib/preview-html';
-// import '@kangc/v-md-editor/lib/style/preview-html.css';
-// import '@kangc/v-md-editor/lib/theme/style/github';
+import EditorPreview from '@/components/toc/HTMLPreview.vue';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 
 const pinia = createPinia();

@@ -40,5 +40,7 @@
   .item-notice {
     margin-top: 10px;
     animation: announ_animation 0.8s linear infinite;
+    font-size: 14px;
+    color: #4c4948;
   }
 </style>

@@ -37,7 +37,7 @@
 <script lang="ts" setup>
   import CardUserInfo from '@/components/toc/CardUserInfo.vue';
   import CardNotice from '@/components/toc/CardNotice.vue';
-  import ArticlePreview from '@/components/toc/ArticlePreview.vue';
+  import ArticlePreview from '@/components/toc/HTMLPreview.vue';
   import { onMounted } from 'vue';
   import { useRoute } from 'vue-router';
   import { reqArticleDetails } from '@/api/articleApi';

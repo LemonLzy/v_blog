@@ -46,6 +46,8 @@ declare module '@vue/runtime-core' {
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
     ElUpload: typeof import('element-plus/es')['ElUpload']
+    HTMLPreview: typeof import('./src/components/toc/HTMLPreview.vue')['default']
+    MarkdownPreview: typeof import('./src/components/toc/MarkdownPreview.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

@@ -6,7 +6,7 @@
   >
     <el-row>
       <el-col :span="10" style="cursor: pointer" @click="toDetail(article.article_id)">
-        <el-image :src="article.cover" :fit="fit" lazy />
+        <el-image :src="article.cover" :fit="fit" />
       </el-col>
       <el-col :span="14">
         <div class="content">
