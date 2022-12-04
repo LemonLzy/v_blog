@@ -32,7 +32,7 @@
     <el-col :span="4">
       <CardUserInfo
         avatar="https://lemonlzy.cn/img/lemonlzy.jpg"
-        nickname="Monkey·D·Luffy"
+        nickname="Lemonlzy"
         signature="Show me the code."
         category="50"
         tags="13"

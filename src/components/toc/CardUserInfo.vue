@@ -1,27 +1,28 @@
 <template>
   <el-card class="user-card">
-    <el-image
-      class="avatar-img"
-      :src="userInfo.avatar"
-      :fit="'scale-down'"
-      :preview-src-list="userInfo.avatar"
-      :hide-on-click-modal="true"
-      lazy
-    />
+    <div class="avatar-div">
+      <el-avatar class="avatar-img" :src="userInfo.avatar" :fit="'fill'" :size="100" />
+    </div>
     <div class="nickname">{{ userInfo.nickname }}</div>
     <div class="signature">{{ userInfo.signature }}</div>
     <el-row class="statistics">
       <el-col :sm="6" class="articleTotal">
-        <el-row justify="center">文章</el-row>
-        <el-row justify="center">{{ userInfo.articleTotal }}</el-row>
+        <el-row justify="center" class="subTitle">文章</el-row>
+        <el-row justify="center" class="subStatistics">
+          {{ userInfo.articleTotal }}
+        </el-row>
       </el-col>
       <el-col :sm="6" class="tags">
-        <el-row justify="center">标签</el-row>
-        <el-row justify="center">{{ userInfo.tags }}</el-row>
+        <el-row justify="center" class="subTitle">标签</el-row>
+        <el-row justify="center" class="subStatistics">
+          {{ userInfo.tags }}
+        </el-row>
       </el-col>
       <el-col :sm="6" class="category">
-        <el-row justify="center">分类</el-row>
-        <el-row justify="center">{{ userInfo.category }}</el-row>
+        <el-row justify="center" class="subTitle">分类</el-row>
+        <el-row justify="center" class="subStatistics">
+          {{ userInfo.category }}
+        </el-row>
       </el-col>
     </el-row>
     <el-link class="follow" :icon="Platform" :underline="false">Follow Me</el-link>
@@ -64,11 +65,13 @@
   .el-card {
     @apply rounded-xl;
 
-    .avatar-img {
-      height: 100px;
+    .avatar-div {
       margin-bottom: 10px;
+      @apply flex items-center justify-center;
+    }
+
+    .avatar-img {
       background: rgba(0, 0, 0, 0);
-      @apply flex items-center justify-between;
       transition: filter 375ms ease-in 0.2s, transform 0.3s;
     }
 
@@ -98,7 +101,15 @@
       @apply flex justify-center items-center;
       margin-top: 13px;
       color: #4c4948;
-      font-size: 1em;
+
+      .subTitle {
+        font-size: 0.8em;
+      }
+
+      .subStatistics {
+        font-size: 1.2em;
+        color: #1f2d3d;
+      }
     }
 
     .follow {
