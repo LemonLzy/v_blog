@@ -6,11 +6,11 @@
     :show-date="true"
     :created="articleDetails.created"
     :updated="articleDetails.updated"
-  ></cover-preview>
+  />
   <el-row id="scrollElRow">
     <el-col :span="4"></el-col>
     <el-col :span="12">
-      <ArticlePreview :html="articleDetails.htmlContent"></ArticlePreview>
+      <ArticlePreview :html="articleDetails.htmlContent" />
     </el-col>
     <el-col :span="1"></el-col>
     <el-col :span="4">

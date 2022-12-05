@@ -10,6 +10,7 @@ declare module '@vue/runtime-core' {
     ArticlePreview: typeof import('./src/components/toc/ArticlePreview.vue')['default']
     CardArticleInfo: typeof import('./src/components/toc/CardArticleInfo.vue')['default']
     CardNotice: typeof import('./src/components/toc/CardNotice.vue')['default']
+    CardRelatedArticle: typeof import('./src/components/common/CardRelatedArticle.vue')['default']
     CardTag: typeof import('./src/components/toc/CardTag.vue')['default']
     CardUserInfo: typeof import('./src/components/toc/CardUserInfo.vue')['default']
     CommonPage: typeof import('./src/components/common/CommonPage.vue')['default']

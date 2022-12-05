@@ -45,7 +45,7 @@
       title: string;
       summary: string;
       cover: string;
-      created_at: number;
+      created_at: string;
     }[];
   }>();
 

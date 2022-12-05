@@ -14,7 +14,7 @@ export interface ArticleListInfo {
   cover: string;
   content: string;
   created_at: string;
-  updated_at: number;
+  updated_at: string;
 }
 
 export const reqArticleList = (page: number, size: number) => {

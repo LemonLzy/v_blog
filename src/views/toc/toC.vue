@@ -6,7 +6,7 @@
   <el-row id="scrollElRow">
     <el-col :span="4"></el-col>
     <el-col :span="12">
-      <CardArticleInfo class="cardArticleInfo" :article-list="list" />
+      <CardArticleInfo :article-list="list" />
       <common-page
         class="page"
         :total="total"
@@ -27,12 +27,7 @@
         :link="link"
       />
       <CardNotice />
-      <el-card class="user-card">
-        <div class="pub_time">头像</div>
-        <div class="pub_time">昵称</div>
-        <div class="pub_time">signature</div>
-        <div class="pub_time">文章total</div>
-      </el-card>
+      <CardRelatedArticle :article-list="list" />
       <el-card class="user-card">
         <div class="pub_time">头像</div>
         <div class="pub_time">昵称</div>
@@ -54,6 +49,7 @@
   import CommonPage from '@/components/common/CommonPage.vue';
   import useArticle from '@/hooks/api/useArticle';
   import MenuHeader from '@/components/common/MenuHeader.vue';
+  import CardRelatedArticle from '@/components/common/CardRelatedArticle.vue';
 
   const formParam = reactive({ page: 1, size: 10 });
   const link = reactive({
