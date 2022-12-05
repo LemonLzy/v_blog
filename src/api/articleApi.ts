@@ -49,6 +49,8 @@ export interface ArticleDetails {
   title: string;
   content: string;
   cover: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export const reqArticleDetails = (articleID: string) => {

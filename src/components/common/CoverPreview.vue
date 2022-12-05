@@ -7,11 +7,11 @@
         <el-icon class="createdIcon" color="#eeeeee" :size="13">
           <Calendar />
         </el-icon>
-        <div class="dateText">发表于 {{ created }}</div>
+        <div class="dateText">发表于 {{ conversionTimestamp(created) }}</div>
         <el-icon>
           <Refresh />
         </el-icon>
-        <div class="dateText">更新于 {{ updated }}</div>
+        <div class="dateText">更新于 {{ conversionTimestamp(updated) }}</div>
       </el-space>
     </el-row>
   </div>
@@ -19,6 +19,7 @@
 
 <script lang="ts" setup>
   import { Calendar, Refresh } from '@element-plus/icons';
+  import { conversionTimestamp } from '@/app/utils';
 
   defineProps<{
     cover: string;

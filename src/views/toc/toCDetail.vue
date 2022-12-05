@@ -1,10 +1,16 @@
 <template>
   <menu-header></menu-header>
-  <cover-preview :cover="cover" :title="title" :show-date="true"></cover-preview>
+  <cover-preview
+    :cover="articleDetails.cover"
+    :title="articleDetails.title"
+    :show-date="true"
+    :created="articleDetails.created"
+    :updated="articleDetails.updated"
+  ></cover-preview>
   <el-row id="scrollElRow">
     <el-col :span="4"></el-col>
     <el-col :span="12">
-      <ArticlePreview :html="htmlContent"></ArticlePreview>
+      <ArticlePreview :html="articleDetails.htmlContent"></ArticlePreview>
     </el-col>
     <el-col :span="1"></el-col>
     <el-col :span="4">
@@ -17,7 +23,7 @@
         article-total="10"
         :link="link"
       />
-      <CardNotice notice="欢迎访问xxx" />
+      <CardNotice />
       <el-card class="user-card">
         <div class="pub_time">头像</div>
         <div class="pub_time">昵称</div>
@@ -50,10 +56,13 @@
   import CoverPreview from '@/components/common/CoverPreview.vue';
 
   const route = useRoute();
-  let htmlContent = ref('');
-  let cover = ref('');
-  let title = ref('');
-  let created = ref(Date);
+  const articleDetails = reactive({
+    htmlContent: ref(''),
+    cover: ref(''),
+    title: ref(''),
+    created: ref(''),
+    updated: ref(''),
+  });
   const link = reactive({
     github: 'https://github.com/lemonlzy',
     email: 'mailto:lzy291980138@163.com',
@@ -71,9 +80,11 @@
         ElMessage.error(msg);
         return;
       }
-      htmlContent.value = data.content;
-      cover.value = data.cover;
-      title.value = data.title;
+      articleDetails.htmlContent = data.content;
+      articleDetails.cover = data.cover;
+      articleDetails.title = data.title;
+      articleDetails.created = data.created_at;
+      articleDetails.updated = data.updated_at;
       return;
     } catch (e: any) {
       ElMessage.error(e.message);

@@ -26,7 +26,7 @@
         article-total="10"
         :link="link"
       />
-      <CardNotice notice="感谢访问，若喜欢烦请收藏 ^_^" />
+      <CardNotice />
       <el-card class="user-card">
         <div class="pub_time">头像</div>
         <div class="pub_time">昵称</div>

@@ -8,16 +8,15 @@
       </div>
       <div class="item-headline-title">公告</div>
     </div>
-    <div class="item-notice">{{ extraInfo.notice }}</div>
+    <div class="item-notice">{{ notice }}</div>
   </el-card>
 </template>
 
 <script lang="ts" setup>
   import { Sunny } from '@element-plus/icons';
+  import { ref } from 'vue';
 
-  const extraInfo = defineProps<{
-    notice: string;
-  }>();
+  const notice = ref('感谢访问，若喜欢烦请收藏 ^_^"');
 </script>
 
 <style lang="scss" scoped>

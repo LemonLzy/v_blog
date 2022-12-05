@@ -1,6 +1,7 @@
 import { ref, Ref, watch } from 'vue';
 import { ArticleListInfo, reqArticleList } from '@/api/articleApi';
 import { Code_Success } from '@/app/codes';
+import { conversionTimestamp } from '@/app/utils';
 
 // function + composition api = hooks，hooks就是类似于函数，提供对逻辑的复用，利用了vue3的响应式模块
 const useArticle = () => {
@@ -40,14 +41,5 @@ const useArticle = () => {
     articleList,
   };
 };
-
-function conversionTimestamp(timestamp: string) {
-  let date = new Date(Number(timestamp) * 1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
-  let Y = date.getFullYear() + '-';
-  let M = (date.getMonth() < 9 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-  let D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
-
-  return Y + M + D;
-}
 
 export default useArticle;
