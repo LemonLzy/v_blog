@@ -24,19 +24,7 @@
         :link="link"
       />
       <CardNotice />
-      <el-card class="user-card">
-        <div class="pub_time">头像</div>
-        <div class="pub_time">昵称</div>
-        <div class="pub_time">signature</div>
-        <div class="pub_time">文章total</div>
-      </el-card>
-      <el-card class="user-card">
-        <div class="pub_time">头像</div>
-        <div class="pub_time">昵称</div>
-        <div class="pub_time">分类</div>
-        <div class="pub_time">Follow Me</div>
-        <div class="pub_time">Link</div>
-      </el-card>
+      <CardRelatedArticle />
     </el-col>
     <el-col :span="1"></el-col>
   </el-row>
@@ -54,6 +42,7 @@
   import { ref } from 'vue';
   import MenuHeader from '@/components/common/MenuHeader.vue';
   import CoverPreview from '@/components/common/CoverPreview.vue';
+  import CardRelatedArticle from '@/components/common/CardRelatedArticle.vue';
 
   const route = useRoute();
   const articleDetails = reactive({

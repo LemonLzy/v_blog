@@ -27,7 +27,7 @@
         :link="link"
       />
       <CardNotice />
-      <CardRelatedArticle :article-list="list" />
+      <CardRelatedArticle />
       <el-card class="user-card">
         <div class="pub_time">头像</div>
         <div class="pub_time">昵称</div>
@@ -67,7 +67,6 @@
     window.scrollTo({
       top: scrollY,
       left: 0,
-      // behavior: 'smooth',
     });
     formParam.page = p;
   };

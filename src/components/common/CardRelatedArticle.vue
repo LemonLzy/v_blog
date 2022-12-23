@@ -8,11 +8,7 @@
         <div class="card_title">最新文章</div>
       </el-space>
     </el-row>
-    <div
-      v-for="article in articleInfo.articleList.slice(0, 5)"
-      :key="article.article_id"
-      class="relatedList"
-    >
+    <div v-for="article in list.slice(0, 5)" :key="article.article_id" class="relatedList">
       <el-row>
         <el-col
           class="relatedImg"
@@ -46,16 +42,13 @@
 <script lang="ts" setup>
   import { Guide } from '@element-plus/icons';
   import router from '@/router';
+  import { reactive, toRef } from 'vue';
+  import useArticle from '@/hooks/api/useArticle';
 
   const fit = 'scale-down';
-  const articleInfo = defineProps<{
-    articleList: {
-      article_id: string;
-      title: string;
-      cover: string;
-      created_at: string;
-    }[];
-  }>();
+  const formParam = reactive({ page: 1, size: 5 });
+  const { articleList } = useArticle();
+  const { list } = articleList(toRef(formParam, 'page'), toRef(formParam, 'size'), true);
 
   const toDetail = (articleID: string) => {
     router.push({ name: 'details', params: { id: articleID } });
