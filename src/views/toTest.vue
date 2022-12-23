@@ -1,14 +1,14 @@
 <template>
   <div class="typer">
     <div class="typer-content">
-      <p class="typer-static">LemonLzy</p>
+      <p class="typer_static">LemonLzy</p>
       <!-- 动态变化的内容-->
-      <p class="typer-dynamic">
+      <p class="typer_dynamic">
         <span class="cut">
           <span v-for="(letter, index) in words" :key="index" class="word">{{ letter }}</span>
         </span>
         <!-- 模拟光标-->
-        <span class="typer-cursor animation"></span>
+        <span class="typer_cursor animation"></span>
       </p>
     </div>
   </div>
@@ -84,7 +84,7 @@
     box-sizing: border-box;
   }
 
-  .typer .typer-content {
+  .typer .typer_content {
     font-weight: bold;
     font-size: 50px;
     display: flex;
@@ -92,7 +92,7 @@
     letter-spacing: 2px;
   }
 
-  .typer-dynamic {
+  .typer_dynamic {
     position: relative;
   }
 
@@ -100,7 +100,7 @@
     color: #e84d49;
   }
 
-  .typer-cursor {
+  .typer_cursor {
     position: absolute;
     height: 100%;
     width: 3px;
