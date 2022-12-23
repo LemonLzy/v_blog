@@ -2,6 +2,13 @@
   <menu-header></menu-header>
   <div class="div_main_cover">
     <el-image class="img_main_cover" :src="'https://lemonlzy.cn/img/index.jpg'" :fit="'cover'" />
+    <div class="sig">
+      <el-row class="signature">
+        <el-space>
+          <span class="sig_span">{{ showText }}</span>
+        </el-space>
+      </el-row>
+    </div>
   </div>
   <el-row id="scrollElRow">
     <el-col :span="4"></el-col>
@@ -42,7 +49,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { reactive, toRef } from 'vue';
+  import { onMounted, reactive, ref, toRef } from 'vue';
   import CardUserInfo from '@/components/toc/CardUserInfo.vue';
   import CardNotice from '@/components/toc/CardNotice.vue';
   import CardArticleInfo from '@/components/toc/CardArticleInfo.vue';
@@ -56,6 +63,7 @@
     github: 'https://github.com/lemonlzy',
     email: 'mailto:lzy291980138@163.com',
   });
+  let showText = ref('');
 
   const { articleList } = useArticle();
   const { list, total } = articleList(toRef(formParam, 'page'), toRef(formParam, 'size'), true);
@@ -69,6 +77,25 @@
       left: 0,
     });
     formParam.page = p;
+  };
+
+  onMounted(() => {
+    appear('Fake it util you become it.');
+  });
+
+  const appear = (content: string) => {
+    let count = 1;
+
+    function changeContent() {
+      showText.value = content.substring(0, count); //截取字符串
+      count++;
+
+      if (count != content.length + 1) {
+        setTimeout(changeContent, 100);
+      }
+    }
+
+    changeContent();
   };
 </script>
 
@@ -84,6 +111,49 @@
     .img_main_cover {
       @apply w-full;
       @apply h-full;
+    }
+
+    .img_main_cover:before {
+      position: fixed;
+      backdrop-filter: blur(1px);
+      z-index: 1;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .sig {
+      width: 100%;
+      height: 100px;
+      position: absolute;
+      top: 50vh;
+
+      .signature {
+        color: #ffffff;
+        font-size: 1.72em;
+        text-shadow: 2px 2px 4px rgb(0 0 0 / 15%);
+        line-height: 1.5;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        @apply flex items-center justify-center;
+
+        &__text {
+          opacity: 0;
+          animation: fade-in #{1500ms} ease-out both 1 /*infinite*/
+        ;
+          @for $idx from 1 through 50 {
+            &:nth-child(#{$idx}) {
+              animation-delay: #{($idx - 1) * 1500ms};
+            }
+          }
+        }
+      }
+
+      @keyframes fade-in {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
     }
   }
 
