@@ -115,7 +115,6 @@
 
     .img_main_cover:before {
       position: fixed;
-      backdrop-filter: blur(1px);
       z-index: 1;
       background: rgba(0, 0, 0, 0.5);
     }
@@ -134,25 +133,6 @@
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
         @apply flex items-center justify-center;
 
-        &__text {
-          opacity: 0;
-          animation: fade-in #{1500ms} ease-out both 1 /*infinite*/
-        ;
-          @for $idx from 1 through 50 {
-            &:nth-child(#{$idx}) {
-              animation-delay: #{($idx - 1) * 1500ms};
-            }
-          }
-        }
-      }
-
-      @keyframes fade-in {
-        0% {
-          opacity: 0;
-        }
-        100% {
-          opacity: 1;
-        }
       }
     }
   }

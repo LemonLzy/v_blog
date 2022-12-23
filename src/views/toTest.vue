@@ -1,28 +1,124 @@
 <template>
-  <div>count: {{ countStore.num }}</div>
-  <div>
-    <button class="bg-green-300 text-white rounded px-2 py-1" @click="countStore.increment()">
-      +1
-    </button>
+  <div class="typer">
+    <div class="typer-content">
+      <p class="typer-static">LemonLzy</p>
+      <!-- 动态变化的内容-->
+      <p class="typer-dynamic">
+        <span class="cut">
+          <span v-for="(letter, index) in words" :key="index" class="word">{{ letter }}</span>
+        </span>
+        <!-- 模拟光标-->
+        <span class="typer-cursor animation"></span>
+      </p>
+    </div>
   </div>
-  <div>
-    <p>x:{{ x }}</p>
-    <p>x:{{ y }}</p>
-  </div>
-  <el-button>ok!</el-button>
-  <app-icon icon="flat-color-icons:search"></app-icon>
 </template>
 
 <script lang="ts" setup="setup">
-  import useCountStore from '@/store/module/useCountStore';
-  import AppIcon from '@/components/common/AppIcon.vue';
-  import useMouse from '@/hooks/useMouse';
+  import { onMounted, ref, watch } from 'vue';
 
-  console.log(import.meta.env.VITE_API_URL);
+  let str = 'Fake it until you become it.';
+  let letters = ref(['']);
+  let words = ref(['']);
+  let order = ref(1);
 
-  const countStore = useCountStore();
+  watch(order, () => {
+    if (order.value % 2 == 1) {
+      str = 'Fake it until you become it.';
+    } else {
+      str = '万事顺遂.';
+    }
+  });
 
-  const { x, y } = useMouse();
+  onMounted(() => {
+    begin();
+  });
+
+  //开始输入的效果动画
+  const begin = () => {
+    letters.value = str.split('');
+    for (let i = 0; i < letters.value.length; i++) {
+      setTimeout(write(i), i * 100);
+    }
+  };
+
+  //开始删除的效果动画
+  const back = () => {
+    let l = letters.value.length;
+    for (let i = 0; i < l; i++) {
+      setTimeout(wipe(), i * 50);
+    }
+  };
+
+  //输入字母
+  const write = (i: number) => {
+    return () => {
+      let l = letters.value.length;
+      words.value.push(letters.value[i]);
+      /*如果输入完毕，在2s后开始删除*/
+      if (i == l - 1) {
+        setTimeout(function() {
+          back();
+        }, 1500);
+      }
+    };
+  };
+
+  const wipe = () => {
+    return () => {
+      words.value.pop();
+      /*如果删除完毕，在300ms后开始输入*/
+      if (words.value.length == 1) {
+        order.value++;
+        setTimeout(function() {
+          begin();
+        }, 1000);
+      }
+    };
+  };
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+  .typer {
+    margin-top: 2%;
+    box-sizing: border-box;
+  }
+
+  .typer .typer-content {
+    font-weight: bold;
+    font-size: 50px;
+    display: flex;
+    flex-direction: row;
+    letter-spacing: 2px;
+  }
+
+  .typer-dynamic {
+    position: relative;
+  }
+
+  .cut {
+    color: #e84d49;
+  }
+
+  .typer-cursor {
+    position: absolute;
+    height: 100%;
+    width: 3px;
+    top: 0;
+    right: -10px;
+    background-color: #e84d49;
+    animation: blink 1s infinite steps(1, start);
+  }
+
+  @keyframes blink {
+    0% {
+      background-color: white;
+    }
+    50% {
+      background-color: black;
+    }
+    100% {
+      background-color: white;
+    }
+  }
+</style>
