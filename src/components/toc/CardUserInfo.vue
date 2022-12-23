@@ -25,7 +25,12 @@
         </el-row>
       </el-col>
     </el-row>
-    <el-link class="follow" :icon="Platform" :underline="false">Follow Me</el-link>
+    <el-link class="follow" :underline="false" :href="userInfo.link.github" target="_blank">
+      <template #icon>
+        <app-icon icon="mdi:github" class="github text-xl cursor-pointer"></app-icon>
+        Follow Me
+      </template>
+    </el-link>
     <el-row class="extra-link">
       <app-icon
         icon="mdi:github"
@@ -42,7 +47,6 @@
 </template>
 
 <script lang="ts" setup>
-  import { Platform } from '@element-plus/icons';
   import AppIcon from '@/components/common/AppIcon.vue';
 
   const userInfo = defineProps<{
@@ -83,7 +87,7 @@
       font-weight: 500;
       font-size: 1.4em;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto,
-      'PingFang SC', 'Microsoft YaHei', sans-serif;
+        'PingFang SC', 'Microsoft YaHei', sans-serif;
       @apply flex justify-center items-center;
     }
 
@@ -92,7 +96,7 @@
       color: #4c4948;
       font-size: 14px;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto,
-      'PingFang SC', 'Microsoft YaHei', sans-serif;
+        'PingFang SC', 'Microsoft YaHei', sans-serif;
       line-height: 2;
       @apply flex justify-center items-center;
     }
@@ -119,6 +123,10 @@
       height: 34px;
       color: #ffffff;
       transition: all 0.2s ease-in-out;
+    }
+
+    .github {
+      margin-right: 10px;
     }
 
     .follow:hover {
