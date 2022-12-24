@@ -30,6 +30,7 @@
     </el-col>
     <el-col :span="1"></el-col>
   </el-row>
+  <common-footer class="footer" />
 </template>
 
 <script lang="ts" setup>
@@ -45,6 +46,7 @@
   import MenuHeader from '@/components/common/MenuHeader.vue';
   import CoverPreview from '@/components/common/CoverPreview.vue';
   import CardRelatedArticle from '@/components/common/CardRelatedArticle.vue';
+  import CommonFooter from '@/components/common/CommonFooter.vue';
 
   const route = useRoute();
   const articleDetails = reactive({
@@ -96,5 +98,9 @@
   .el-card {
     margin-top: 20px;
     @apply rounded-xl;
+  }
+
+  .footer {
+    margin-top: 20px;
   }
 </style>

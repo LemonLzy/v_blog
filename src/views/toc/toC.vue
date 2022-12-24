@@ -34,7 +34,7 @@
       />
     </el-col>
     <el-col :span="1"></el-col>
-    <el-col :span="5">
+    <el-col :span="4">
       <CardUserInfo
         avatar="https://lemonlzy.cn/img/lemonlzy.jpg"
         nickname="Lemonlzy"
@@ -55,6 +55,7 @@
       </el-card>
     </el-col>
   </el-row>
+  <common-footer />
   <el-backtop :right="100" :bottom="100" />
 </template>
 
@@ -68,6 +69,7 @@
   import MenuHeader from '@/components/common/MenuHeader.vue';
   import CardRelatedArticle from '@/components/common/CardRelatedArticle.vue';
   import { ArrowDownBold } from '@element-plus/icons';
+  import CommonFooter from '@/components/common/CommonFooter.vue';
 
   const formParam = reactive({ page: 1, size: 10 });
   const link = reactive({
