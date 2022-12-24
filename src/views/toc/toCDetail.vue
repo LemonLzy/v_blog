@@ -24,7 +24,9 @@
         :link="link"
       />
       <CardNotice />
-      <CardRelatedArticle />
+      <el-affix>
+        <CardRelatedArticle />
+      </el-affix>
     </el-col>
     <el-col :span="1"></el-col>
   </el-row>

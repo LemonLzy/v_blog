@@ -71,6 +71,7 @@
   }
 
   .relatedImg {
+    margin-bottom: 10px;
     transition: all 0.375s ease-in-out;
     @apply flex items-center justify-center;
   }

@@ -22,8 +22,8 @@
     </div>
   </div>
   <el-row id="scrollElRow">
-    <el-col :span="4"></el-col>
-    <el-col :span="12">
+    <el-col :span="3"></el-col>
+    <el-col :span="13">
       <CardArticleInfo :article-list="list" />
       <common-page
         class="page"
@@ -34,7 +34,7 @@
       />
     </el-col>
     <el-col :span="1"></el-col>
-    <el-col :span="4">
+    <el-col :span="5">
       <CardUserInfo
         avatar="https://lemonlzy.cn/img/lemonlzy.jpg"
         nickname="Lemonlzy"
@@ -54,7 +54,6 @@
         <div class="pub_time">Link</div>
       </el-card>
     </el-col>
-    <el-col :span="1"></el-col>
   </el-row>
   <el-backtop :right="100" :bottom="100" />
 </template>

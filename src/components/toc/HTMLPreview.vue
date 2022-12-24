@@ -1,10 +1,12 @@
 <template>
-  <v-md-preview-html
-    :html="html"
-    class="htmlPreview"
-    preview-class="vuepress-markdown-body"
-    @copy-code-success="handleCopyCodeSuccess"
-  ></v-md-preview-html>
+  <el-card>
+    <v-md-preview-html
+      :html="html"
+      class="htmlPreview"
+      preview-class="vuepress-markdown-body"
+      @copy-code-success="handleCopyCodeSuccess"
+    ></v-md-preview-html>
+  </el-card>
 </template>
 
 <script lang="ts" setup>
