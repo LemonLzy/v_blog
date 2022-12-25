@@ -37,8 +37,9 @@
   import CardUserInfo from '@/components/toc/CardUserInfo.vue';
   import CardNotice from '@/components/toc/CardNotice.vue';
   import ArticlePreview from '@/components/toc/HTMLPreview.vue';
-  import { onMounted, reactive } from 'vue';
+  import { onMounted, reactive, watch } from 'vue';
   import { useRoute } from 'vue-router';
+  import router from '@/router';
   import { reqArticleDetails } from '@/api/articleApi';
   import { Code_Success } from '@/app/codes';
   import { ElMessage } from 'element-plus/es';
@@ -62,11 +63,18 @@
   });
 
   onMounted(() => {
-    loadBlog();
+    loadBlog(route.params.id as string);
   });
 
-  const loadBlog = async () => {
-    const articleID = route.params.id as string;
+  watch(
+    // vue-router 同一路由下跳转，通过watch监听路由参数，来获取最新的详情id，从而刷新页面
+    () => router.currentRoute.value,
+    () => {
+      loadBlog(router.currentRoute.value.params.id as string);
+    },
+  );
+
+  const loadBlog = async (articleID: string) => {
     try {
       let { code, data, msg } = await reqArticleDetails(articleID);
       if (code !== Code_Success) {
@@ -76,8 +84,8 @@
       articleDetails.htmlContent = data.content;
       articleDetails.cover = data.cover;
       articleDetails.title = data.title;
-      articleDetails.created = data.created_at;
-      articleDetails.updated = data.updated_at;
+      articleDetails.created = data.created_at + ''; // 强转为string，避免警告
+      articleDetails.updated = data.updated_at + '';
       return;
     } catch (e: any) {
       ElMessage.error(e.message);
