@@ -9,7 +9,7 @@
       <el-row justify="center" class="copyright">{{ footer_info.copyright }}</el-row>
       <el-row justify="center" class="welcome">{{ footer_info.welcome }}</el-row>
       <el-row justify="center" class="icp">
-        <el-image class="icp_img" src="@/../public/icp.png"></el-image>
+        <el-image class="icp_img" src="/icp.png"></el-image>
         <a
           class="icp_link"
           href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43019002001052"

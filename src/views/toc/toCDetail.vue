@@ -70,7 +70,10 @@
     // vue-router 同一路由下跳转，通过watch监听路由参数，来获取最新的详情id，从而刷新页面
     () => router.currentRoute.value,
     () => {
-      loadBlog(router.currentRoute.value.params.id as string);
+      // 仅在details页面内部跳转时，刷新页面
+      if (router.currentRoute.value.name == 'details') {
+        loadBlog(router.currentRoute.value.params.id as string);
+      }
     },
   );
 
