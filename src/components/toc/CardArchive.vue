@@ -39,9 +39,7 @@
         ElMessage.error(msg);
         return;
       }
-      console.log('data.list' + data.list);
       archiveInfo.value = data.list || [];
-      console.log('archiveInfo:' + archiveInfo.value);
       return;
     } catch (e: any) {
       ElMessage.error(e.message);

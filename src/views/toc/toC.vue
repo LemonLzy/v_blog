@@ -24,7 +24,7 @@
   <el-row id="scrollElRow">
     <el-col :span="3"></el-col>
     <el-col :span="13">
-      <CardArticleInfo :article-list="list" />
+      <card-article-info :article-list="list" />
       <common-page
         class="page"
         :total="total"
@@ -44,15 +44,9 @@
         :article-total="total"
         :link="link"
       />
-      <CardNotice />
-      <CardRelatedArticle />
-      <el-card class="user-card">
-        <div class="pub_time">头像</div>
-        <div class="pub_time">昵称</div>
-        <div class="pub_time">分类</div>
-        <div class="pub_time">Follow Me</div>
-        <div class="pub_time">Link</div>
-      </el-card>
+      <card-notice />
+      <card-related-article />
+      <card-tag />
       <card-archive />
       <card-web-info />
     </el-col>
@@ -74,6 +68,7 @@
   import CommonFooter from '@/components/common/CommonFooter.vue';
   import CardWebInfo from '@/components/common/CardWebInfo.vue';
   import CardArchive from '@/components/toc/CardArchive.vue';
+  import CardTag from '@/components/toc/CardTag.vue';
 
   const formParam = reactive({ page: 1, size: 10 });
   const link = reactive({
