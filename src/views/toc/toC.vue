@@ -41,7 +41,7 @@
         signature="Show me the code."
         category="50"
         tags="13"
-        article-total="10"
+        :article-total="total"
         :link="link"
       />
       <CardNotice />
@@ -53,6 +53,7 @@
         <div class="pub_time">Follow Me</div>
         <div class="pub_time">Link</div>
       </el-card>
+      <card-web-info />
     </el-col>
   </el-row>
   <common-footer />
@@ -70,6 +71,7 @@
   import CardRelatedArticle from '@/components/common/CardRelatedArticle.vue';
   import { ArrowDownBold } from '@element-plus/icons';
   import CommonFooter from '@/components/common/CommonFooter.vue';
+  import CardWebInfo from '@/components/common/CardWebInfo.vue';
 
   const formParam = reactive({ page: 1, size: 10 });
   const link = reactive({

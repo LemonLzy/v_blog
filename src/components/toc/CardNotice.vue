@@ -16,7 +16,7 @@
   import { Sunny } from '@element-plus/icons';
   import { ref } from 'vue';
 
-  const notice = ref('感谢访问，若喜欢烦请收藏 ^_^"');
+  const notice = ref('感谢访问，若喜欢烦请收藏 ^_^');
 
   // todo get notice from user config
 </script>

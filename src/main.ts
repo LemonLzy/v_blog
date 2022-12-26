@@ -11,6 +11,7 @@ import VueCookies from 'vue3-cookies';
 import EditorMarkdown from '@/components/common/EditorMarkdown.vue';
 import EditorPreview from '@/components/toc/HTMLPreview.vue';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
+import { ElCollapseTransition } from 'element-plus';
 
 const pinia = createPinia();
 
@@ -34,5 +35,6 @@ app.use(ElementPlus, { locale: zhCn });
 // app.use(VMdPreviewHtml);
 app.component('EditorMarkdown', EditorMarkdown);
 app.component('EditorPreview', EditorPreview);
+app.component(ElCollapseTransition.name, ElCollapseTransition);
 
 app.mount('#app');

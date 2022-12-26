@@ -53,7 +53,7 @@
     avatar: string;
     nickname: string;
     signature: string;
-    articleTotal: string;
+    articleTotal: number;
     tags: string;
     category: string;
     link: {
@@ -113,6 +113,7 @@
       .subStatistics {
         font-size: 1.2em;
         color: #1f2d3d;
+        cursor: pointer;
       }
     }
 
