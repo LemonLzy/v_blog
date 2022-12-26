@@ -60,3 +60,20 @@ export const reqArticleDetails = (articleID: string) => {
     method: 'get',
   });
 };
+
+export interface ArchiveList {
+  month: string;
+  count: number;
+}
+
+export interface ArchiveListData {
+  list: ArchiveList[];
+}
+
+export const reqArchiveList = () => {
+  //axios http
+  return useHTTP<BasicResp<ArchiveListData>>({
+    url: `/api/articles/archive`,
+    method: 'get',
+  });
+};

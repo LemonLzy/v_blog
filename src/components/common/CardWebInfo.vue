@@ -37,6 +37,7 @@
 
   .el-card {
     @apply rounded-xl;
+    margin-bottom: 20px;
   }
 
   .web-info {

@@ -53,6 +53,7 @@
         <div class="pub_time">Follow Me</div>
         <div class="pub_time">Link</div>
       </el-card>
+      <card-archive />
       <card-web-info />
     </el-col>
   </el-row>
@@ -72,6 +73,7 @@
   import { ArrowDownBold } from '@element-plus/icons';
   import CommonFooter from '@/components/common/CommonFooter.vue';
   import CardWebInfo from '@/components/common/CardWebInfo.vue';
+  import CardArchive from '@/components/toc/CardArchive.vue';
 
   const formParam = reactive({ page: 1, size: 10 });
   const link = reactive({

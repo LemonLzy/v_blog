@@ -47,8 +47,8 @@
   .footer_cover {
     height: 192px;
     @apply flex w-full;
-    -webkit-backdrop-filter: blur(0px);
-    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(1px);
+    backdrop-filter: blur(1px);
   }
 
   .footer_cover:before {
@@ -57,7 +57,7 @@
     left: 0;
     bottom: 0;
     right: 0;
-    backdrop-filter: blur(0px);
+    backdrop-filter: blur(1px);
     z-index: 1;
     background: rgba(0, 0, 0, 0.3);
   }
